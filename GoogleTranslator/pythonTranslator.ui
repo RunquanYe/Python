@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>690</width>
+    <height>423</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Python Tranlator</string>
+  </property>
+  <property name="toolTipDuration">
+   <number>0</number>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit{border: 0.5px solid red; border-radius:50%;}</string>
+  </property>
+  <property name="inputMethodHints">
+   <set>Qt::ImhExclusiveInputMask</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="lookUpButton">
+    <property name="geometry">
+     <rect>
+      <x>587</x>
+      <y>17</y>
+      <width>82</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Reference Sans Serif</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #80ff80;
+</string>
+    </property>
+    <property name="text">
+     <string>Look Up</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="wordTranslate">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>68</y>
+      <width>650</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>648</width>
+       <height>299</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLineEdit" name="inputWord">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>17</y>
+      <width>551</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDialableCharactersOnly|Qt::ImhDigitsOnly|Qt::ImhEmailCharactersOnly|Qt::ImhFormattedNumbersOnly|Qt::ImhLatinOnly|Qt::ImhLowercaseOnly|Qt::ImhUppercaseOnly|Qt::ImhUrlCharactersOnly</set>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="background" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(&quot;GoogleTranslator/bg.gif&quot;);</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>690</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_As"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuTranslate">
+    <property name="font">
+     <font>
+      <family>MS Reference Sans Serif</family>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="title">
+     <string>Translate</string>
+    </property>
+    <widget class="QMenu" name="menuTranslate_Options">
+     <property name="title">
+      <string>Translate Options</string>
+     </property>
+     <addaction name="actionEnglish"/>
+     <addaction name="actionChinese"/>
+     <addaction name="actionJapanese"/>
+     <addaction name="actionOther_s"/>
+    </widget>
+    <widget class="QMenu" name="menuPrograme_Language">
+     <property name="title">
+      <string>Programe Language</string>
+     </property>
+     <addaction name="actionEnglish_2"/>
+     <addaction name="actionChinese_2"/>
+     <addaction name="actionJapanese_2"/>
+     <addaction name="actionOther_s_2"/>
+    </widget>
+    <addaction name="actionSearch_Word"/>
+    <addaction name="actionTranslate_Document"/>
+    <addaction name="actionDetect_Language"/>
+    <addaction name="menuTranslate_Options"/>
+    <addaction name="menuPrograme_Language"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout_Project"/>
+    <addaction name="actionAbout_Programmer"/>
+    <addaction name="actionConnect_Me"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTranslate"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSave_As">
+   <property name="text">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionAbout_Project">
+   <property name="text">
+    <string>About Project</string>
+   </property>
+  </action>
+  <action name="actionAbout_Programmer">
+   <property name="text">
+    <string>About Programmer</string>
+   </property>
+  </action>
+  <action name="actionConnect_Me">
+   <property name="text">
+    <string>Connect Me</string>
+   </property>
+  </action>
+  <action name="actionSearch_Word">
+   <property name="text">
+    <string>Search Word</string>
+   </property>
+  </action>
+  <action name="actionTranslate_Document">
+   <property name="text">
+    <string>Translate Document</string>
+   </property>
+  </action>
+  <action name="actionDetect_Language">
+   <property name="text">
+    <string>Detect Language</string>
+   </property>
+  </action>
+  <action name="actionPrograme_Language">
+   <property name="text">
+    <string>Programe Language</string>
+   </property>
+  </action>
+  <action name="actionPrograme_Language_2">
+   <property name="text">
+    <string>Programe Language</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionChinese">
+   <property name="text">
+    <string>Chinese</string>
+   </property>
+  </action>
+  <action name="actionJapanese">
+   <property name="text">
+    <string>Japanese</string>
+   </property>
+  </action>
+  <action name="actionOther_s">
+   <property name="text">
+    <string>Other(s)</string>
+   </property>
+  </action>
+  <action name="actionEnglish_2">
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionChinese_2">
+   <property name="text">
+    <string>Chinese</string>
+   </property>
+  </action>
+  <action name="actionJapanese_2">
+   <property name="text">
+    <string>Japanese</string>
+   </property>
+  </action>
+  <action name="actionOther_s_2">
+   <property name="text">
+    <string>Other(s)</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
