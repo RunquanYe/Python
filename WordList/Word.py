@@ -9,8 +9,8 @@ Date: Sept/2020
 
 class Word():
 #constructor
-    name, catergory, meaning, root, derivativeWord, sourceWord, listNum, isHead = '', '', '', '', '', '', 0, False
-    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, listNum, isHead):
+    name, catergory, meaning, root, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', 0, 0, False
+    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
         if bool(name and name.strip()):
             self.name = name.lower()
         else:
@@ -34,6 +34,9 @@ class Word():
 
         if bool(sourceWord and sourceWord.strip()):
             self.sourceWord = sourceWord.lower()
+
+        if int(wordNum) > 0:
+            self.wordNum = int(wordNum)
 
         if int(listNum) > 0:
             self.listNum = int(listNum)
@@ -66,6 +69,9 @@ class Word():
 
     def getSourceWord(self):
         return self.sourceWord.lower()
+
+    def getWordNum(self):
+        return self.wordNum
 
     def getListNum(self):
         return self.listNum
@@ -125,9 +131,13 @@ class Word():
         if bool(sourceWord and sourceWord.strip()):
             self.sourceWord = sourceWord.lower()
 
+    def setListNum(self, wordNum):
+        if int(wordNum) > 0:
+            self.wordNum = int(wordNum)
+
     def setListNum(self, listNum):
-        if bool(listNum and listNum.strip()):
-            self.listNum = int(listNum)
+        if int(listNum) > 0:
+            self.wordNum = int(listNum)
 
     def setIsHead(self, isHead):
         if bool(isHead and isHead.strip()):

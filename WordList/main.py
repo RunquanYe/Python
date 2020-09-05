@@ -6,9 +6,8 @@ Author: Runquan Ye
 Date: Sept/2020
 '''
 
-
 def main():
-    a = Word('Subsidiary','adj, N', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 1, False)
+    a = Word('Subsidiary','adj, N', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
     print("name: ", a.getWord())
     print("category: ", a.getCatergory())
     print("category list: ", a.getCatergoryList())
@@ -16,6 +15,7 @@ def main():
     print("root: ", a.getRoot())
     print("derivative: ", a.getDerivativeWord())
     print("source: ", a.getSourceWord())
+    print("word num: ", a.getWordNum())
     print("list num: ", a.getListNum())
     print("meaning: ", a.getMeaning())
     print("meaning list: ", a.getMeaningList())
@@ -24,7 +24,6 @@ def main():
     print("word meaning dist: ", a.getWordMeaningDist())
     print("word list dist: ", a.getWordMeaningDistList())
     print("word catstring dist: ", a.getWordMeaningDistCatString())
-
 
 
 # Start method trigger.
