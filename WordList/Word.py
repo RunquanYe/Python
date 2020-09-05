@@ -1,4 +1,6 @@
 import re
+import json
+import Exception
 '''
 This is a class for Word and its attributes
 Author: Runquan Ye
@@ -7,34 +9,34 @@ Date: Sept/2020
 
 class Word():
 #constructor
-    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, listNum):
+    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, listNum, isHead):
         if(bool(self.name and self.name.strip())):
-            self.name = name
+            self.name = name.lower()
         else:
-            pass
+            raise Exception.WordNameEmpty
 
         if (bool(self.catergory and self.catergory.strip())):
-            self.catergory = catergory
+            self.catergory = catergory.lower()
         else:
-            pass
+            raise Exception.WordCategoryEmpty
 
         if (bool(self.meaning and self.meaning.strip())):
             self.meaning = meaning
         else:
-            pass
+            raise Exception.WordMeaningEmpty
 
         if (bool(self.root and self.root.strip())):
-            self.root = root
+            self.root = root.lower()
         else:
             self.root = ''
 
         if (bool(self.derivativeWord and self.derivativeWord.strip())):
-            self.derivativeWord = derivativeWord
+            self.derivativeWord = derivativeWord.lower()
         else:
             self.derivativeWord = ''
 
         if (bool(self.sourceWord and self.sourceWord.strip())):
-            self.sourceWord = sourceWord
+            self.sourceWord = sourceWord.lower()
         else:
             self.sourceWord = ''
 
@@ -42,6 +44,11 @@ class Word():
             self.listNum = int(listNum)
         else:
             self.listNum = 0
+
+        if (bool(self.isHead and self.isHead.strip())):
+            self.isHead = json.loads(isHead.lower())
+        else:
+            self.isHead = False
 
 
 #getters
@@ -77,38 +84,30 @@ class Word():
 # setters
     def setCatergory(self, catergory):
         if (bool(self.catergory and self.catergory.strip())):
-            self.catergory = catergory
-        else:
-            pass
+            self.catergory = catergory.lower()
 
     def setRoot(self, root):
         if (bool(self.root and self.root.strip())):
-            self.root = root
-        else:
-            self.root = ''
+            self.root = root.lower()
 
     def setDerivativeWord(self, derivativeWord):
         if (bool(self.derivativeWord and self.derivativeWord.strip())):
-            self.derivativeWord = derivativeWord
-        else:
-            self.derivativeWord = ''
+            self.derivativeWord = derivativeWord.lower()
 
     def setSourceWord(self, sourceWord):
         if (bool(self.sourceWord and self.sourceWord.strip())):
-            self.sourceWord = sourceWord
-        else:
-            self.sourceWord = ''
+            self.sourceWord = sourceWord.lower()
 
     def setListNum(self, listNum):
         if (bool(self.listNum and self.listNum.strip())):
             self.listNum = int(listNum)
-        else:
-            self.listNum = 0
+
+    def setIsHead(self, isHead):
+        if (bool(self.isHead and self.isHead.strip())):
+            self.isHead = json.loads(isHead.lower())
 
     def setMeaning(self, meaning):
         if (bool(self.meaning and self.meaning.strip())):
             self.meaning = meaning
-        else:
-            pass
 
 
