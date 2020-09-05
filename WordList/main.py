@@ -26,6 +26,9 @@ def main():
         print("word meaning dist: ", a.getWordMeaningDist())
         print("word list dist: ", a.getWordMeaningDistList())
         print("word catstring dist: ", a.getWordMeaningDistCatString())
+        
+    except OSError as err:
+        print("OS error: {0}".format(err))
     except WordNameEmpty:
         print("Error! Empty word name!")
         pass
