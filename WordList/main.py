@@ -29,6 +29,7 @@ def main():
         
     except OSError as err:
         print("OS error: {0}".format(err))
+        pass
     except WordNameEmpty:
         print("Error! Empty word name!")
         pass
