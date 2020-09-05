@@ -9,46 +9,37 @@ Date: Sept/2020
 
 class Word():
 #constructor
+    name, catergory, meaning, root, derivativeWord, sourceWord, listNum, isHead = '', '', '', '', '', '', 0, False
     def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, listNum, isHead):
-        if bool(self.name and self.name.strip()):
+        if bool(name and name.strip()):
             self.name = name.lower()
         else:
             raise Exception.WordNameEmpty
 
-        if bool(self.catergory and self.catergory.strip()):
+        if bool(catergory and catergory.strip()):
             self.catergory = catergory.lower()
         else:
             raise Exception.WordCategoryEmpty
 
-        if bool(self.meaning and self.meaning.strip()):
+        if bool(meaning and meaning.strip()):
             self.meaning = meaning
         else:
             raise Exception.WordMeaningEmpty
 
-        if bool(self.root and self.root.strip()):
+        if bool(root and root.strip()):
             self.root = root.lower()
-        else:
-            self.root = ''
 
-        if bool(self.derivativeWord and self.derivativeWord.strip()):
+        if bool(derivativeWord and derivativeWord.strip()):
             self.derivativeWord = derivativeWord.lower()
-        else:
-            self.derivativeWord = ''
 
-        if bool(self.sourceWord and self.sourceWord.strip()):
+        if bool(sourceWord and sourceWord.strip()):
             self.sourceWord = sourceWord.lower()
-        else:
-            self.sourceWord = ''
 
-        if bool(self.listNum and self.listNum.strip()):
+        if int(listNum) > 0:
             self.listNum = int(listNum)
-        else:
-            self.listNum = 0
 
-        if bool(self.isHead and self.isHead.strip()):
+        if bool(isHead and isHead.strip()):
             self.isHead = json.loads(isHead.lower())
-        else:
-            self.isHead = False
 
 
 #getters
@@ -112,9 +103,10 @@ class Word():
         #{'subsidiary': {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}}
         return {self.name.lower() : self.getMeaningDistCatString()}
 
+
 # setters
     def setCatergory(self, catergory):
-        if bool(self.catergory and self.catergory.strip()):
+        if bool(catergory and catergory.strip()):
             self.catergory = catergory.lower()
 
     def setCatergoryInList(self, catergoryList):
@@ -122,25 +114,25 @@ class Word():
             self.catergory = ', '.join(str(i).lower() for i in sorted(catergoryList))
 
     def setRoot(self, root):
-        if bool(self.root and self.root.strip()):
+        if bool(root and root.strip()):
             self.root = root.lower()
 
     def setDerivativeWord(self, derivativeWord):
-        if bool(self.derivativeWord and self.derivativeWord.strip()):
+        if bool(derivativeWord and derivativeWord.strip()):
             self.derivativeWord = derivativeWord.lower()
 
     def setSourceWord(self, sourceWord):
-        if bool(self.sourceWord and self.sourceWord.strip()):
+        if bool(sourceWord and sourceWord.strip()):
             self.sourceWord = sourceWord.lower()
 
     def setListNum(self, listNum):
-        if bool(self.listNum and self.listNum.strip()):
+        if bool(listNum and listNum.strip()):
             self.listNum = int(listNum)
 
     def setIsHead(self, isHead):
-        if bool(self.isHead and self.isHead.strip()):
+        if bool(isHead and isHead.strip()):
             self.isHead = json.loads(isHead.lower())
 
     def setMeaning(self, meaning):
-        if bool(self.meaning and self.meaning.strip()):
+        if bool(meaning and meaning.strip()):
             self.meaning = meaning
