@@ -59,10 +59,10 @@ class Word():
         return self.catergory
 
     def getCatergoryList(self):
-        return list(filter(None, list(re.split('[,.; ]', self.catergory))))
+        return list(filter(None, list(re.split('[,.; ]', self.catergory)))).sort()
 
     def getCatergoryString(self):
-        sortList = list(filter(None, list(re.split('[,.; ]', self.catergory)))).sort()
+        sortList = self.getCatergoryList()
         return ', '.join([str(e) for e in sortList])
 
     def getRoot(self):
@@ -77,8 +77,20 @@ class Word():
     def getListNum(self):
         return self.listNum
 
-    def getMeaningString(self):
+    def getMeaning(self):
         return self.meaning
+
+    def getMeaningList(self):
+        temp = list(filter(None, list(re.split('[; ]', self.meaning)))).sort()
+        return [list(filter(None, re.split('[., ]',i))) for i in temp]
+
+    def getMeaningDist(self):
+        temp = self.getMeaningList()
+        return {i[0]:i[1:] for i in temp}
+
+    def getMeaningDistString(self):
+        temp = self.getMeaningList()
+        return {i[0]:', '.join(str(e) for e in i[1:]) for i in temp}
 
 
 # setters
@@ -109,5 +121,3 @@ class Word():
     def setMeaning(self, meaning):
         if (bool(self.meaning and self.meaning.strip())):
             self.meaning = meaning
-
-
