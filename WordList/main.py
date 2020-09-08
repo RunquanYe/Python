@@ -9,7 +9,7 @@ Date: Sept/2020
 
 def main():
     try:
-        a = Word('Subsidiary','adj, N', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
+        a = Word('Subsidiary','adj, n', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
         print("name: ", a.getWord())
         print("category: ", a.getCatergory())
         print("category list: ", a.getCatergoryList())
