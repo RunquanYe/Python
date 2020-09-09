@@ -7,7 +7,7 @@ This is a class for Word and its attributes
 -------------------------------------------
     Author: Runquan Ye
     Date: Sept/2020
--------------------------------------------
+------------------------------------------- 
 '''
 
 class Word():
@@ -52,7 +52,9 @@ class Word():
         if int(listNum) > 0:
             self.listNum = int(listNum)
 
-        if bool(isHead and isHead.strip()):
+        if type(isHead) == bool:
+            self.isHead = isHead
+        elif bool(isHead and isHead.strip()):
             self.isHead = json.loads(isHead.lower())
 
 
@@ -111,6 +113,11 @@ class Word():
     def getSourceWord(self):
         return self.sourceWord.lower()
 
+    def getSourceWordString(self):
+        if self.sourceWord.contain('['):
+            pass
+        return self.sourceWord.lower()
+
     def getWordNum(self):
         return self.wordNum
 
@@ -145,6 +152,10 @@ class Word():
     def getWordMeaningDistCatString(self):
         #{'subsidiary': {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}}
         return {self.name.lower() : self.getMeaningDistCatString()}
+
+    def getWordToString(self):
+        #{'subsidiary': {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}}
+        return f"{self.wordNum} {self.name} {self.getUSPTwTitle()} {self.getMeaning()} {self.derivativeWord} {self.sourceWord} {self.listNum}."
 
 
 # setters

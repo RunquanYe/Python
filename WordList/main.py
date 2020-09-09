@@ -12,7 +12,22 @@ This is a python project for me to store English Academic Word List
 -------------------------------------------------------------------
 '''
 
-def main():
+
+def main(inputFile):
+    # open file in the read mode
+    infile = open(inputFile, "r")
+    outfile = open('outputFile.txt', "w+")
+
+    # read the file content lines by lines
+    lines = infile.readlines()
+
+    for l in lines:
+        wordlist = l.split(' ')
+        firstWord = wordlist[0]
+        outfile.write(Word(firstWord,'', '', '', str(wordlist[1:]),'', 1, 1, True).getWordToString())
+        for vocabulary in wordlist[1:]:
+            print(vocabulary)
+
     '''
      b = DataSource("boxy")
      print("name: ", b.getWordName())
@@ -50,15 +65,20 @@ def main():
     except WordNameEmpty:
         print("Error! Empty word name!")
         pass
-'''   
+    '''   
     except WordCategoryEmpty:
         print("Error! Empty word category!")
         pass
     except WordMeaningEmpty:
         print("Error! Empty word meaning!")
         pass
-'''
+    '''
+    # close files
+    infile.close()
+    outfile.close()
+
+
 
 # Start method trigger.
 if __name__ == '__main__':
-    main()
+    main("inputFile.txt")
