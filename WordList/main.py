@@ -1,5 +1,6 @@
 from Exception import *
 from Word import *
+from DataSource import *
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -11,7 +12,13 @@ Date: Sept/2020
 
 def main():
 
-    get_data()
+    b = DataSource("time")
+    print("name: ", b.getWordName())
+    print("category string: ", b.getWordCategory())
+    print("category list: ", b.getWordCategoryList())
+    print("meaning string: ", b.getWordMeaning())
+    print("meaning list: ", b.getWordMeaningList())
+
     '''
     try:
         a = Word('Subsidiary','adj, n', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
@@ -45,38 +52,6 @@ def main():
         print("Error! Empty word meaning!")
         pass
     '''
-
-def get_data():
-    webpage = urlopen('https://cn.bing.com/dict/search?q=hail&mkt=zh-cn').read()
-
-    soup = BeautifulSoup(webpage, 'html.parser')
-
-    target = soup.find_all('meta')
-    for i in target:
-        if "name" in i.attrs:
-            if i["name"] == "description":
-                rawData = str(i["content"])
-
-    hindex = rawData.find("释义，美")
-    tindex = rawData.find("网络释义")
-    #data => 美[səbˈsɪdiˌeri]，英[səbˈsɪdiəri]，n.子公司；附属公司； adj.辅助的；附带的；次要的；附属的；
-    data = rawData[(hindex+3) : tindex]
-
-    t1 = re.split('[，]', data)
-
-    uspt = str(t1[0][1:])
-    ukpt = str(t1[1][1:])
-    wRawMean = str(t1[2])[:-2]
-
-    wTempMean = re.sub('\；\s+([a-z,A-Z]+\.)', '|\\1', wRawMean)
-    print(wTempMean)
-    wMean = wTempMean.replace('；', ', ').replace('|', '; ')
-
-    t3 = re.split('[;；]', wMean.lower())
-    t4 = [i[0] for i in sorted([list(filter(None, re.split('[.,， ]',i))) for i in t3])]
-    print(wMean)
-    print(t3)
-    print(t4)
 
 # Start method trigger.
 if __name__ == '__main__':
