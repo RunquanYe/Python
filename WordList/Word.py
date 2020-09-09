@@ -1,6 +1,7 @@
 import re
 import json
 import Exception
+from DataSource import *
 '''
 This is a class for Word and its attributes
 Author: Runquan Ye
@@ -11,27 +12,28 @@ class Word():
 #constructor
     #词名，词类，词意，美音标，英音标，词根，派生词，源生词，词号，词表号，是否源生词
     name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', '', '', 0, 0, False
-    def __init__(self, name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
+    onlineSource = None
+
+    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
+
         if bool(name and name.strip()):
             self.name = name.lower()
+            self.onlineSource = DataSource(self.name)
         else:
             raise Exception.WordNameEmpty
-
-        if bool(catergory and catergory.strip()):
-            self.catergory = catergory.lower()
-        else:
-            raise Exception.WordCategoryEmpty
 
         if bool(meaning and meaning.strip()):
             self.meaning = meaning
         else:
-            raise Exception.WordMeaningEmpty
+            self.meaning = DataSource(self.name).getWordMeaning()
 
-        if bool(us_pt and us_pt.strip()):
-            self.us_pt = us_pt.lower()
-
-        if bool(uk_pt and uk_pt.strip()):
-            self.uk_pt = uk_pt.lower()
+        if bool(catergory and catergory.strip()):
+            self.catergory = catergory.lower()
+        else:
+            if bool(self.meaning and self.meaning.strip()):
+                self.catergory = ', '.join(str(e) for e in [i[0] for i in self.getMeaningList()]).lower()
+            else:
+                self.catergory = self.onlineSource.getWordCategory()
 
         if bool(root and root.strip()):
             self.root = root.lower()
@@ -69,21 +71,33 @@ class Word():
         return ', '.join([str(e) for e in sortList]).lower()
 
     def getUSPT(self):
+        if not bool(self.us_pt and self.us_pt.strip()):
+            self.us_pt = self.onlineSource.getWordDataUSPT()
         return self.us_pt
 
     def getUKPT(self):
+        if not bool(self.uk_pt and self.uk_pt.strip()):
+            self.uk_pt = self.onlineSource.getWordDataUKPT()
         return self.uk_pt
 
     def getUSPTwTitle(self):
+        if not bool(self.us_pt and self.us_pt.strip()):
+            self.us_pt = self.onlineSource.getWordDataUSPT()
         return '美' + self.us_pt
 
     def getUSPTwETitle(self):
+        if not bool(self.us_pt and self.us_pt.strip()):
+            self.us_pt = self.onlineSource.getWordDataUSPT()
         return 'US ' + self.us_pt
 
     def getUKPTwTitle(self):
+        if not bool(self.uk_pt and self.uk_pt.strip()):
+            self.uk_pt = self.onlineSource.getWordDataUKPT()
         return '英' + self.uk_pt
 
-    def getUkPTwETitle(self):
+    def getUKPTwETitle(self):
+        if not bool(self.uk_pt and self.uk_pt.strip()):
+            self.uk_pt = self.onlineSource.getWordDataUKPT()
         return 'UK ' + self.uk_pt
 
     def getRoot(self):
@@ -111,16 +125,12 @@ class Word():
         return sorted([list(filter(None, re.split('[.,， ]',i))) for i in temp])
 
     def getMeaningDist(self):
-        #temp => [['adj', '附属的', '辅助的'], ['n', '子公司', '辅助者', '支流']]
-        temp = self.getMeaningList()
-        #temp => {'adj': ['附属的', '辅助的'], 'n': ['子公司', '辅助者', '支流']}
-        return {i[0]:i[1:] for i in temp}
+        #[['adj', '附属的', '辅助的'], ['n', '子公司', '辅助者', '支流']] => {'adj': ['附属的', '辅助的'], 'n': ['子公司', '辅助者', '支流']}
+        return {i[0]:i[1:] for i in self.getMeaningList()}
 
     def getMeaningDistCatString(self):
-        #temp => ['adj', '附属的', '辅助的'], ['n', '子公司', '辅助者', '支流']]
-        temp = self.getMeaningList()
-        #temp => {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}
-        return {i[0]:', '.join(str(e) for e in i[1:]) for i in temp}
+        #[['adj', '附属的', '辅助的'], ['n', '子公司', '辅助者', '支流']] => {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}
+        return {i[0]:', '.join(str(e) for e in i[1:]) for i in self.getMeaningList()}
 
     def getWordMeaningDist(self):
         #{'Subsidiary': 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流'}

@@ -11,21 +11,24 @@ Date: Sept/2020
 '''
 
 def main():
-
-    b = DataSource("time")
-    print("name: ", b.getWordName())
-    print("category string: ", b.getWordCategory())
-    print("category list: ", b.getWordCategoryList())
-    print("meaning string: ", b.getWordMeaning())
-    print("meaning list: ", b.getWordMeaningList())
-
     '''
+     b = DataSource("boxy")
+     print("name: ", b.getWordName())
+     print("category string: ", b.getWordCategory())
+     print("category list: ", b.getWordCategoryList())
+     print("meaning string: ", b.getWordMeaning())
+     print("meaning list: ", b.getWordMeaningList())
+     print("USPT: ", b.getWordDataUSPT())
+     print("UKPT: ", b.getWordDataUKPT())
+     '''
     try:
-        a = Word('Subsidiary','adj, n', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
+        a = Word('Subsidiary','', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
         print("name: ", a.getWord())
         print("category: ", a.getCatergory())
         print("category list: ", a.getCatergoryList())
         print("category string: ", a.getCatergoryString())
+        print("USPT: ", a.getUSPT(), "; ", a.getUSPTwTitle(), "; ", a.getUSPTwETitle())
+        print("UKPT: ", a.getUKPT(), "; ", a.getUKPTwTitle(), "; ", a.getUKPTwETitle())
         print("root: ", a.getRoot())
         print("derivative: ", a.getDerivativeWord())
         print("source: ", a.getSourceWord())
@@ -51,7 +54,7 @@ def main():
     except WordMeaningEmpty:
         print("Error! Empty word meaning!")
         pass
-    '''
+
 
 # Start method trigger.
 if __name__ == '__main__':
