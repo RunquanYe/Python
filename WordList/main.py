@@ -22,7 +22,7 @@ def main():
      print("UKPT: ", b.getWordDataUKPT())
      '''
     try:
-        a = Word('Subsidiary','', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
+        a = Word('Subsidiary','n. adj', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
         print("name: ", a.getWord())
         print("category: ", a.getCatergory())
         print("category list: ", a.getCatergoryList())
@@ -48,13 +48,14 @@ def main():
     except WordNameEmpty:
         print("Error! Empty word name!")
         pass
+'''   
     except WordCategoryEmpty:
         print("Error! Empty word category!")
         pass
     except WordMeaningEmpty:
         print("Error! Empty word meaning!")
         pass
-
+'''
 
 # Start method trigger.
 if __name__ == '__main__':

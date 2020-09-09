@@ -8,6 +8,7 @@ class WordNameEmpty(Exception):
     #Exception for empty word name string.
     pass
 
+'''
 class WordCategoryEmpty(Exception):
     #Exception for empty word catergory string.
     pass
@@ -15,3 +16,4 @@ class WordCategoryEmpty(Exception):
 class WordMeaningEmpty(Exception):
     #Exception for empty word meaning string.
     pass
+'''
