@@ -6,8 +6,10 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 '''
 This is a python project for me to store English Academic Word List
-Author: Runquan Ye
-Date: Sept/2020
+-------------------------------------------------------------------
+    Author: Runquan Ye
+    Date: Sept/2020
+-------------------------------------------------------------------
 '''
 
 def main():

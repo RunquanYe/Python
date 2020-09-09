@@ -1,7 +1,9 @@
 '''
 This is a customized exception class
-Author: Runquan Ye
-Date: Sept/2020
+------------------------------------
+    Author: Runquan Ye
+    Date: Sept/2020
+------------------------------------
 '''
 
 class WordNameEmpty(Exception):

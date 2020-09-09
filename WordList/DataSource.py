@@ -3,8 +3,10 @@ from bs4 import BeautifulSoup
 import re
 '''
 This is a class for finding online data for the missing data
-Author: Runquan Ye
-Date: Sept/2020
+------------------------------------------------------------
+    Author: Runquan Ye
+    Date: Sept/2020
+------------------------------------------------------------
 '''
 
 class DataSource():
@@ -38,27 +40,29 @@ class DataSource():
 
             #temp => ['美[heɪl]', '英[heɪl]', 'n. 冰雹；雹子；【气】雹；像雹子般落下的东西； v. 招呼；〈正式〉喊；捧；歌颂； int. 万岁； ']
             temp = re.split('[,，]', data)
-            #uspt => '[heɪl]'
-            uspt = str(temp[0][1:])
-            #ukpt => '[heɪl]'
-            ukpt = str(temp[1][1:])
-            #wRawMean => 'n. 冰雹；雹子；【气】雹；像雹子般落下的东西； v. 招呼；〈正式〉喊；捧；歌颂； int. 万岁'
-            wRawMean = str(temp[2])[:-2]
 
-            #wTempMean => n. 冰雹；雹子；【气】雹；像雹子般落下的东西｜v. 招呼；〈正式〉喊；捧；歌颂｜int. 万岁
-            wTempMean = re.sub('\；\s+([a-z,A-Z]+\.)', '|\\1', wRawMean)
-            # wMean => n. 冰雹, 雹子, 【气】雹, 像雹子般落下的东西; v. 招呼, 〈正式〉喊, 捧, 歌颂; int. 万岁
-            wMean = wTempMean.replace('；', ', ').replace('|', '; ')
+            if len(temp) == 3:
+                #uspt => '[heɪl]'
+                uspt = str(temp[0][1:])
+                #ukpt => '[heɪl]'
+                ukpt = str(temp[1][1:])
+                #wRawMean => 'n. 冰雹；雹子；【气】雹；像雹子般落下的东西； v. 招呼；〈正式〉喊；捧；歌颂； int. 万岁'
+                wRawMean = str(temp[2])[:-2]
 
-            # wMean => ['n. 冰雹, 雹子, 【气】雹, 像雹子般落下的东西', ' v. 招呼, 〈正式〉喊, 捧, 歌颂', ' int. 万岁']
-            self.dMeaningList = re.split('[;；]', wMean.lower())
-            #dMeaningList => ['int', 'n', 'v']
-            self.dCatergoryList = [i[0] for i in sorted([list(filter(None, re.split('[.,， ]', i))) for i in self.dMeaningList])]
+                #wTempMean => n. 冰雹；雹子；【气】雹；像雹子般落下的东西｜v. 招呼；〈正式〉喊；捧；歌颂｜int. 万岁
+                wTempMean = re.sub('\；\s+([a-z,A-Z]+\.)', '|\\1', wRawMean)
+                # wMean => n. 冰雹, 雹子, 【气】雹, 像雹子般落下的东西; v. 招呼, 〈正式〉喊, 捧, 歌颂; int. 万岁
+                wMean = wTempMean.replace('；', ', ').replace('|', '; ')
 
-            self.dUs_pt = uspt
-            self.dUk_pt = ukpt
-            self.dCatergory = ', '.join(str(i) for i in self.dCatergoryList)
-            self.dMeaning = wMean
+                # wMean => ['n. 冰雹, 雹子, 【气】雹, 像雹子般落下的东西', ' v. 招呼, 〈正式〉喊, 捧, 歌颂', ' int. 万岁']
+                self.dMeaningList = re.split('[;；]', wMean.lower())
+                #dMeaningList => ['int', 'n', 'v']
+                self.dCatergoryList = [i[0] for i in sorted([list(filter(None, re.split('[.,， ]', i))) for i in self.dMeaningList])]
+
+                self.dUs_pt = uspt
+                self.dUk_pt = ukpt
+                self.dCatergory = ', '.join(str(i) for i in self.dCatergoryList)
+                self.dMeaning = wMean
 
 
     def getWordName(self):

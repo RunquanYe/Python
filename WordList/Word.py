@@ -4,8 +4,10 @@ import Exception
 from DataSource import *
 '''
 This is a class for Word and its attributes
-Author: Runquan Ye
-Date: Sept/2020
+-------------------------------------------
+    Author: Runquan Ye
+    Date: Sept/2020
+-------------------------------------------
 '''
 
 class Word():
@@ -83,22 +85,22 @@ class Word():
     def getUSPTwTitle(self):
         if not bool(self.us_pt and self.us_pt.strip()):
             self.us_pt = self.onlineSource.getWordDataUSPT()
-        return '美' + self.us_pt
+        return  '美' + self.us_pt if bool(self.us_pt and self.us_pt.strip()) else ''
 
     def getUSPTwETitle(self):
         if not bool(self.us_pt and self.us_pt.strip()):
             self.us_pt = self.onlineSource.getWordDataUSPT()
-        return 'US ' + self.us_pt
+        return 'US ' + self.us_pt if bool(self.us_pt and self.us_pt.strip()) else ''
 
     def getUKPTwTitle(self):
         if not bool(self.uk_pt and self.uk_pt.strip()):
             self.uk_pt = self.onlineSource.getWordDataUKPT()
-        return '英' + self.uk_pt
+        return '英' + self.uk_pt if bool(self.uk_pt and self.uk_pt.strip()) else ''
 
     def getUKPTwETitle(self):
         if not bool(self.uk_pt and self.uk_pt.strip()):
             self.uk_pt = self.onlineSource.getWordDataUKPT()
-        return 'UK ' + self.uk_pt
+        return 'UK ' + self.uk_pt if bool(self.uk_pt and self.uk_pt.strip()) else ''
 
     def getRoot(self):
         return self.root.lower()
