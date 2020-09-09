@@ -9,8 +9,9 @@ Date: Sept/2020
 
 class Word():
 #constructor
-    name, catergory, meaning, root, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', 0, 0, False
-    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
+    #词名，词类，词意，美音标，英音标，词根，派生词，源生词，词号，词表号，是否源生词
+    name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', '', '', 0, 0, False
+    def __init__(self, name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
         if bool(name and name.strip()):
             self.name = name.lower()
         else:
@@ -25,6 +26,12 @@ class Word():
             self.meaning = meaning
         else:
             raise Exception.WordMeaningEmpty
+
+        if bool(us_pt and us_pt.strip()):
+            self.us_pt = us_pt.lower()
+
+        if bool(uk_pt and uk_pt.strip()):
+            self.uk_pt = uk_pt.lower()
 
         if bool(root and root.strip()):
             self.root = root.lower()
@@ -54,12 +61,30 @@ class Word():
 
     def getCatergoryList(self):
         #'n., Adj. ,vt., v' => ['adj', 'n', 'v', 'vt']
-        return sorted(list(filter(None, list(re.split('[,.; ]', self.catergory.lower())))))
+        return sorted(list(filter(None, list(re.split('[,.;，； ]', self.catergory.lower())))))
 
     def getCatergoryString(self):
         #'n., Adj. ,vt., v' => 'adj, n, v, vt'
         sortList = self.getCatergoryList()
         return ', '.join([str(e) for e in sortList]).lower()
+
+    def getUSPT(self):
+        return self.us_pt
+
+    def getUKPT(self):
+        return self.uk_pt
+
+    def getUSPTwTitle(self):
+        return '美' + self.us_pt
+
+    def getUSPTwETitle(self):
+        return 'US ' + self.us_pt
+
+    def getUKPTwTitle(self):
+        return '英' + self.uk_pt
+
+    def getUkPTwETitle(self):
+        return 'UK ' + self.uk_pt
 
     def getRoot(self):
         return self.root.lower()
@@ -81,9 +106,9 @@ class Word():
 
     def getMeaningList(self):
         #adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流' => ['adj. 附属的, 辅助的', ' n. 子公司, 辅助者, 支流']
-        temp = re.split('[;]', self.meaning.lower())
+        temp = re.split('[;；]', self.meaning.lower())
         #['adj. 附属的, 辅助的', ' n. 子公司, 辅助者, 支流'] => [['adj', '附属的', '辅助的'], ['n', '子公司', '辅助者', '支流']]
-        return sorted([list(filter(None, re.split('[., ]',i))) for i in temp])
+        return sorted([list(filter(None, re.split('[.,， ]',i))) for i in temp])
 
     def getMeaningDist(self):
         #temp => [['adj', '附属的', '辅助的'], ['n', '子公司', '辅助者', '支流']]
@@ -118,6 +143,14 @@ class Word():
     def setCatergoryInList(self, catergoryList):
         if catergoryList:
             self.catergory = ', '.join(str(i).lower() for i in sorted(catergoryList))
+
+    def setUSPT(self, us_pt):
+        if bool(us_pt and us_pt.strip()):
+            self.us_pt = us_pt
+
+    def setUKPT(self, uk_pt):
+        if bool(uk_pt and uk_pt.strip()):
+            self.uk_pt = uk_pt
 
     def setRoot(self, root):
         if bool(root and root.strip()):
