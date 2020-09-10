@@ -133,6 +133,9 @@ class Word():
     def getMeaning(self):
         return self.meaning.lower()
 
+    def getMeaningToString(self):
+        return str('; '.join(str(e) for e in re.split('[;；]', self.meaning.lower())))
+
     def getMeaningList(self):
         #adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流' => ['adj. 附属的, 辅助的', ' n. 子公司, 辅助者, 支流']
         temp = re.split('[;；]', self.meaning.lower())
@@ -162,8 +165,8 @@ class Word():
     # def getWordToString(self, sperator=' '):
     #     return f"{self.wordNum}{sperator}{self.name}{sperator}{self.getUSPTwTitle()}{sperator}{self.getMeaning()}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{self.listNum}"
 
-    def getWordToString(self, sperator=' '):
-        return (''.format(self.wordNum, self.name, self.getUSPTwTitle(), self.getMeaning(), self.derivativeWord, self.sourceWord, self.listNum))
+    def getWordToString(self, sep='|'):
+        return '{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<50}{sep}{4:{gap}^5}\n'.format(self.getWordNum(), self.getWord(), self.getUSPTwTitle(), self.getMeaningToString(), self.getListNum(), gap=' ', sep=sep)
 
 # setters
     def setCatergory(self, catergory):

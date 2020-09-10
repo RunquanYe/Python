@@ -1,4 +1,9 @@
-                                                               Academic Words List Application                                                               
-                                Programmer: Runquan Ye        Date: September 2020        Github: Https://Github.Com/Runquanye                               =============================================================================================================================================================
--编号-|-----单词-----|---------音标---------|------------------------词意------------------------|---词根---|-------------派生词--------------|----源生词-----|-词表-
-  1  |analyse      |美[ˈæn(ə)lˌaɪz]       |v. 分析                                             |         |analyser, analysis, analyst, analytic, analytical, analytically, analyze|              |  1  
+                                    Academic Words List Application                                     
+     Programmer: Runquan Ye        Date: September 2020        Github: Https://Github.Com/Runquanye     ========================================================================================================
+-编号-|-----单词-----|---------音标---------|------------------------词意------------------------|-词表-
+  1  |analyse      |美['æn(ə)l.aɪz]       |v. 分析                                             |  1  
+  2  |analyser     |美['ænəlæɪzə]         |n. 分析仪, 分析员, 分析镜, 分析筛                             |  1  
+  3  |analysis     |美[ə'næləsɪs]         |n. 分析结果, （对物质成分的）分析                               |  1  
+  4  |analyst      |美['æn(ə)lɪst]        |n. 分析者, 化验员                                       |  1  
+  5  |analytical   |美[.ænə'lɪtɪk(ə)l]    |adjs. 分析的, 解析的, 分析性的, （科学）分析的                     |  1  
+  6  |analytically |美[ˌænə'lɪtɪklɪ]      |adv. 在解析上, 用解析方法                                  |  1  
