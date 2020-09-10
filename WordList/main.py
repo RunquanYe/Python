@@ -15,18 +15,25 @@ This is a python project for me to store English Academic Word List
 
 def main(inputFile):
     # open file in the read mode
+    wordnum = 0
     infile = open(inputFile, "r")
     outfile = open('outputFile.txt', "w+")
 
     # read the file content lines by lines
     lines = infile.readlines()
 
+    header = '{0:{gap}^4}{sep}{1:{gap}^12}{sep}{2:{gap}^20}{sep}{3:{gap}^50}{sep}{4:{gap}^8}{sep}{5:{gap}^30}{sep}{6:{gap}^12}{sep}{7:{gap}^4}\n'.format('编号', '单词', '音标', '词意', '词根', '派生词', '源生词', '词表', gap='-', sep='|')
+    # outfile.writelines('{0:50}'.format('Academic Words List Application\n'))
+    outfile.writelines(header)
+
     for l in lines:
         wordlist = l.split(' ')
         firstWord = wordlist[0]
-        outfile.write(Word(firstWord,'', '', '', str(wordlist[1:]),'', 1, 1, True).getWordToString())
-        for vocabulary in wordlist[1:]:
-            print(vocabulary)
+        wordnum += 1
+        fw = Word(firstWord,'', '', '', wordlist[1:],'', wordnum, 1, True)
+        outfile.writelines('{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<50}{sep}{4:{gap}^9}{sep}{5:{gap}<32}{sep}{6:{gap}<14}{sep}{7:{gap}^5}\n'.format(fw.getWordNum(), fw.getWord(), fw.getUSPTwTitle(), fw.getMeaning(), fw.getRoot(), fw.getDerivativeWord(), fw.getSourceWord(), fw.getListNum(), gap=' ',sep='|'))
+        # for vocabulary in wordlist[1:]:
+        #     print(vocabulary)
 
     '''
      b = DataSource("boxy")
@@ -39,7 +46,7 @@ def main(inputFile):
      print("UKPT: ", b.getWordDataUKPT())
      '''
     try:
-        a = Word('Subsidiary','n. adj', 'adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流', '', '','', 0, 1, False)
+        a = Word('analyse','', '', '', '','', 0, 1, False)
         print("name: ", a.getWord())
         print("category: ", a.getCatergory())
         print("category list: ", a.getCatergoryList())

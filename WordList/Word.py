@@ -40,8 +40,13 @@ class Word():
         if bool(root and root.strip()):
             self.root = root.lower()
 
-        if bool(derivativeWord and derivativeWord.strip()):
-            self.derivativeWord = derivativeWord.lower()
+
+        if type(derivativeWord) == 'list':
+            if derivativeWord != None:
+                self.derivativeWord = ', '.join(str(e) for e in derivativeWord).lower()
+        if type(derivativeWord) == 'str':
+            if bool(derivativeWord and derivativeWord.strip()):
+                self.derivativeWord = derivativeWord.lower()
 
         if bool(sourceWord and sourceWord.strip()):
             self.sourceWord = sourceWord.lower()
@@ -114,8 +119,6 @@ class Word():
         return self.sourceWord.lower()
 
     def getSourceWordString(self):
-        if self.sourceWord.contain('['):
-            pass
         return self.sourceWord.lower()
 
     def getWordNum(self):
@@ -153,10 +156,11 @@ class Word():
         #{'subsidiary': {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}}
         return {self.name.lower() : self.getMeaningDistCatString()}
 
-    def getWordToString(self):
-        #{'subsidiary': {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}}
-        return f"{self.wordNum} {self.name} {self.getUSPTwTitle()} {self.getMeaning()} {self.derivativeWord} {self.sourceWord} {self.listNum}."
+    # def getWordToString(self, sperator=' '):
+    #     return f"{self.wordNum}{sperator}{self.name}{sperator}{self.getUSPTwTitle()}{sperator}{self.getMeaning()}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{self.listNum}"
 
+    def getWordToString(self, sperator=' '):
+        return (''.format(self.wordNum, self.name, self.getUSPTwTitle(), self.getMeaning(), self.derivativeWord, self.sourceWord, self.listNum))
 
 # setters
     def setCatergory(self, catergory):
