@@ -41,10 +41,10 @@ class Word():
             self.root = root.lower()
 
 
-        if type(derivativeWord) == 'list':
+        if type(derivativeWord) is list:
             if derivativeWord != None:
                 self.derivativeWord = ', '.join(str(e) for e in derivativeWord).lower()
-        if type(derivativeWord) == 'str':
+        if type(derivativeWord) is str:
             if bool(derivativeWord and derivativeWord.strip()):
                 self.derivativeWord = derivativeWord.lower()
 
