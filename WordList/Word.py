@@ -115,6 +115,9 @@ class Word():
     def getDerivativeWord(self):
         return self.derivativeWord.lower()
 
+    def getDerivativeWordList(self):
+        return sorted(list(filter(None, list(re.split('[,.;，； ]', self.derivativeWord.lower())))))
+
     def getSourceWord(self):
         return self.sourceWord.lower()
 

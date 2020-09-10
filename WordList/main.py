@@ -22,15 +22,24 @@ def main(inputFile):
     # read the file content lines by lines
     lines = infile.readlines()
 
-    header = '{0:{gap}^4}{sep}{1:{gap}^12}{sep}{2:{gap}^20}{sep}{3:{gap}^50}{sep}{4:{gap}^8}{sep}{5:{gap}^30}{sep}{6:{gap}^12}{sep}{7:{gap}^4}\n'.format('编号', '单词', '音标', '词意', '词根', '派生词', '源生词', '词表', gap='-', sep='|')
+    title = 'Academic Words List Application'
+    programmer = 'Programmer: Runquan Ye        Date: September 2020'
+    header = '\n{0:{gap}^4}{sep}{1:{gap}^12}{sep}{2:{gap}^20}{sep}{3:{gap}^50}{sep}{4:{gap}^8}{sep}{5:{gap}^30}{sep}{6:{gap}^12}{sep}{7:{gap}^4}\n'.format('编号', '单词', '音标', '词意', '词根', '派生词', '源生词', '词表', gap='-', sep='|')
     # outfile.writelines('{0:50}'.format('Academic Words List Application\n'))
+    outfile.writelines(f"{title.title()}".center(len(header) + 8, " "))
+    outfile.writelines('\n')
+    outfile.writelines(f"{programmer.title()}".center(len(header) + 8, " "))
+    outfile.writelines(f"{'=' * (len(header) + 8)}")
     outfile.writelines(header)
 
     for l in lines:
         wordlist = l.split(' ')
         firstWord = wordlist[0]
         wordnum += 1
-        fw = Word(firstWord,'', '', '', wordlist[1:],'', wordnum, 1, True)
+        fw = Word(firstWord,'', '', '', ', '.join(str(u) for u in wordlist[1:]),'', wordnum, 1, True)
+        print(type(wordlist[1:]))
+        print(type(', '.join(str(u) for u in wordlist[1:])) != 'str')
+        print(fw.getDerivativeWord())
         outfile.writelines('{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<50}{sep}{4:{gap}^9}{sep}{5:{gap}<32}{sep}{6:{gap}<14}{sep}{7:{gap}^5}\n'.format(fw.getWordNum(), fw.getWord(), fw.getUSPTwTitle(), fw.getMeaning(), fw.getRoot(), fw.getDerivativeWord(), fw.getSourceWord(), fw.getListNum(), gap=' ',sep='|'))
         # for vocabulary in wordlist[1:]:
         #     print(vocabulary)
