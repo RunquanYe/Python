@@ -1,6 +1,7 @@
 from Exception import *
 from Word import *
-from DataSource import *
+from DataSourceBY import *
+from DataSourceYD import *
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -14,7 +15,7 @@ This is a python project for me to store English Academic Word List
 
 
 def main(inputFile):
-
+    '''
     # open file in the read mode
     wordnum = 0
     infile = open(inputFile, "r")
@@ -40,16 +41,32 @@ def main(inputFile):
                 word = Word(vocably, '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 1 else '', wordnum, 1, True if wordlist.index(vocably) == 0 else False)
                 outfile.writelines('{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<80.80}\n'.format(word.getWordNum(), word.getWord(), word.getUSPTwTitle(), word.getMeaningToString(), gap=' ',sep='|'))
 
-        '''
-         b = DataSource("boxy")
-         print("name: ", b.getWordName())
-         print("category string: ", b.getWordCategory())
-         print("category list: ", b.getWordCategoryList())
-         print("meaning string: ", b.getWordMeaning())
-         print("meaning list: ", b.getWordMeaningList())
-         print("USPT: ", b.getWordDataUSPT())
-         print("UKPT: ", b.getWordDataUKPT())
-        
+    '''
+
+    b = DataSourceYD("move")
+    print("name: ", b.getWordName())
+    print("category string: ", b.getWordCategory())
+    print("category list: ", b.getWordCategoryList())
+    print("meaning string: ", b.getWordMeaning())
+    print("meaning list: ", b.getWordMeaningList())
+    print("USPT: ", b.getWordDataUSPT())
+    print("UKPT: ", b.getWordDataUKPT())
+    print("过去式: ", b.getWordPastTerm())
+    print("过去分词: ", b.getWordPastParticipleTerm())
+    print("现在分词: ", b.getWordPresentParticipleTerm())
+    print("复数: ", b.getWordPluralTerm())
+    print("第三人称单数: ", b.getWordSingularTerm())
+
+
+    c = DataSourceBY("move")
+    print("name: ", c.getWordName())
+    print("category string: ", c.getWordCategory())
+    print("category list: ", c.getWordCategoryList())
+    print("meaning string: ", c.getWordMeaning())
+    print("meaning list: ", c.getWordMeaningList())
+    print("USPT: ", c.getWordDataUSPT())
+    print("UKPT: ", c.getWordDataUKPT())
+    '''   
         a = Word('analytical','', '', '', '','', 0, 1, False)
         print("name: ", a.getWord())
         print("category: ", a.getCatergory())
@@ -70,7 +87,6 @@ def main(inputFile):
         print("word meaning toString: ", a.getWordToString())
         print("word list dist: ", a.getWordMeaningDistList())
         print("word catstring dist: ", a.getWordMeaningDistCatString())
-        '''
 
     except OSError as err:
         print("OS error: {0}".format(err))
@@ -82,7 +98,7 @@ def main(inputFile):
     # close files
     infile.close()
     outfile.close()
-
+    '''
 
 # Start method trigger.
 if __name__ == '__main__':

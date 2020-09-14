@@ -2,17 +2,17 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re
 '''
-This is a class for finding online data for the missing data
-------------------------------------------------------------
+This is a class for finding online data from Bing Dictionary for the missing data
+---------------------------------------------------------------------------------
     Author: Runquan Ye
     Date: Sept/2020
-------------------------------------------------------------
+---------------------------------------------------------------------------------
 '''
 
-class DataSource():
+class DataSourceBY():
     # constructor
     # 词名，词类，词意，美音标，英音标, 词类list，词意list
-    dName, dCatergory, dMeaning, dUs_pt, dUk_pt, dCatergoryList, dMeaningList = '', '', '', '', '', None, None
+    dName, dCatergory, dMeaning, dUs_pt, dUk_pt, dCatergoryList, dMeaningList = '', '', '', '', '', [], []
 
     def __init__(self, word):
         if bool(word and word.strip()):

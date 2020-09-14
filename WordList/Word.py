@@ -1,7 +1,7 @@
 import re
 import json
 import Exception
-from DataSource import *
+from DataSourceBY import *
 '''
 This is a class for Word and its attributes
 -------------------------------------------
@@ -20,14 +20,14 @@ class Word():
 
         if bool(name and name.strip()):
             self.name = name.lower()
-            self.onlineSource = DataSource(self.name)
+            self.onlineSource = DataSourceBY(self.name)
         else:
             raise Exception.WordNameEmpty
 
         if bool(meaning and meaning.strip()):
             self.meaning = meaning
         else:
-            self.meaning = DataSource(self.name).getWordMeaning()
+            self.meaning = DataSourceBY(self.name).getWordMeaning()
 
         if bool(catergory and catergory.strip()):
             self.catergory = catergory.lower()
