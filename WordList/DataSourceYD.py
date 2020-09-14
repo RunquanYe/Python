@@ -21,10 +21,10 @@ class DataSourceYD():
         if bool(word and word.strip()):
             self.dName = word.lower()
 
-            #get word's data from the web
+        #get word's data from the web
             webpage = urlopen('http://dict.youdao.com/w/eng/' + self.dName + '/#keyfrom=dict2.index').read()
 
-            #transfer opening url to html document
+        #transfer opening url to html document
             soup = BeautifulSoup(webpage, 'html.parser')
             target = soup.find_all("div", class_="trans-container", limit=1)[0]
 

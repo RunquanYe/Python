@@ -43,6 +43,7 @@ def main(inputFile):
 
     '''
 
+    '''
     b = DataSourceYD("move")
     print("name: ", b.getWordName())
     print("category string: ", b.getWordCategory())
@@ -56,7 +57,7 @@ def main(inputFile):
     print("现在分词: ", b.getWordPresentParticipleTerm())
     print("复数: ", b.getWordPluralTerm())
     print("第三人称单数: ", b.getWordSingularTerm())
-
+    '''
 
     c = DataSourceBY("move")
     print("name: ", c.getWordName())

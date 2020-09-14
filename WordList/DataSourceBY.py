@@ -27,6 +27,7 @@ class DataSourceBY():
 
         #find the html element tag
             target = soup.find_all('meta')
+
             for i in target:
                 if "name" in i.attrs:
                     if i["name"] == "description":
