@@ -7,7 +7,6 @@ This is a class for finding online data from YouDao Dictionary for the missing d
     Author: Runquan Ye
     Date: Sept/2020
 -----------------------------------------------------------------------------------
-
 '''
 
 class DataSourceYD():

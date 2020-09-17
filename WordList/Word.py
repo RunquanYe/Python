@@ -40,7 +40,6 @@ class Word():
         if bool(root and root.strip()):
             self.root = root.lower()
 
-
         if type(derivativeWord) is list:
             if derivativeWord != None:
                 self.derivativeWord = ', '.join(str(e) for e in derivativeWord).lower()
