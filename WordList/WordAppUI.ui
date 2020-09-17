@@ -179,7 +179,7 @@
      <x>0</x>
      <y>0</y>
      <width>731</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -201,6 +201,7 @@
     <addaction name="actionAdd"/>
     <addaction name="actionDelete"/>
     <addaction name="actionModify"/>
+    <addaction name="separator"/>
     <addaction name="actionUndo"/>
     <addaction name="actionReset"/>
    </widget>
@@ -217,6 +218,7 @@
     </property>
     <addaction name="actionAbout_Application"/>
     <addaction name="actionAbout_Programmer"/>
+    <addaction name="separator"/>
     <addaction name="actionUML_Diagram"/>
    </widget>
    <addaction name="menuFile"/>
@@ -233,7 +235,7 @@
     <string>Open File</string>
    </property>
    <property name="shortcut">
-    <string>Meta+O</string>
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionSave">
@@ -244,7 +246,7 @@
     <string>Save File</string>
    </property>
    <property name="shortcut">
-    <string>Meta+S</string>
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionUpdate">
@@ -255,7 +257,7 @@
     <string>Update Application Data</string>
    </property>
    <property name="shortcut">
-    <string>Meta+U</string>
+    <string>Ctrl+U</string>
    </property>
   </action>
   <action name="actionHelp">
@@ -266,7 +268,7 @@
     <string>Application Instruction</string>
    </property>
    <property name="shortcut">
-    <string>Meta+H</string>
+    <string>Ctrl+H</string>
    </property>
   </action>
   <action name="actionExit">
@@ -277,7 +279,7 @@
     <string>Quit Application</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Ctrl+F4</string>
+    <string>Ctrl+Alt+F4</string>
    </property>
   </action>
   <action name="actionAbout_Programmer">
@@ -288,7 +290,7 @@
     <string>Show My Profile</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+C</string>
+    <string>Ctrl+Shift+C</string>
    </property>
   </action>
   <action name="actionAbout_Application">
@@ -299,7 +301,7 @@
     <string>Show Project Description</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+P</string>
+    <string>Ctrl+Shift+P</string>
    </property>
   </action>
   <action name="actionAdd">
@@ -310,7 +312,7 @@
     <string>Add New Word</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+A</string>
+    <string>Ctrl+Alt+A</string>
    </property>
   </action>
   <action name="actionDelete">
@@ -321,7 +323,7 @@
     <string>Delete Word</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+D</string>
+    <string>Ctrl+Alt+D</string>
    </property>
   </action>
   <action name="actionModify">
@@ -332,7 +334,7 @@
     <string>Modify Word</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+M</string>
+    <string>Ctrl+Alt+M</string>
    </property>
   </action>
   <action name="actionUndo">
@@ -343,7 +345,7 @@
     <string>Undo Last Edit Order</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+U</string>
+    <string>Ctrl+Alt+U</string>
    </property>
   </action>
   <action name="actionReset">
@@ -354,7 +356,7 @@
     <string>Reset Application Data</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+R</string>
+    <string>Ctrl+Alt+R</string>
    </property>
   </action>
   <action name="actionSelect_Dictionary">
@@ -365,7 +367,7 @@
     <string>Select Source Dictionary</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+S</string>
+    <string>Ctrl+Alt+E</string>
    </property>
   </action>
   <action name="actionSelect_Languary">
@@ -376,7 +378,7 @@
     <string>Select  Application Languary</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+L</string>
+    <string>Ctrl+Alt+L</string>
    </property>
   </action>
   <action name="actionUML_Diagram">
@@ -387,7 +389,7 @@
     <string>Show Project UML Diagram</string>
    </property>
    <property name="shortcut">
-    <string>Meta+Alt+O</string>
+    <string>Ctrl+Shift+D</string>
    </property>
   </action>
  </widget>
