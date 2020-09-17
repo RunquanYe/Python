@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QSplitter, QHBoxLayout
+
 '''
 This is a GUI for the word application
 --------------------------------------
@@ -54,6 +57,15 @@ class Ui_MainWindow(object):
         self.headSpanList = QtWidgets.QListWidget(self.container)
         self.headSpanList.setGeometry(QtCore.QRect(0, 0, 161, 501))
         self.headSpanList.setObjectName("headSpanList")
+
+        hbox = QHBoxLayout()
+        splitter = QSplitter(Qt.Horizontal)
+        splitter.addWidget(self.headSpanList)
+        splitter.addWidget(self.headSpanTable)
+        splitter.setSizes([100, 200])
+        hbox.addWidget(splitter)
+        self.container.setLayout(hbox)
+
         self.gridLayout_3.addWidget(self.container, 0, 0, 1, 1)
         self.tabWidget.addTab(self.headLlistSpanTab, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
