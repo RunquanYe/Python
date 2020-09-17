@@ -58,6 +58,7 @@ class Ui_MainWindow(object):
         self.headSpanList.setGeometry(QtCore.QRect(0, 0, 161, 501))
         self.headSpanList.setObjectName("headSpanList")
 
+        #add the splitter
         hbox = QHBoxLayout()
         splitter = QSplitter(Qt.Horizontal)
         splitter.addWidget(self.headSpanList)
