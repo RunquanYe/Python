@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
 '''
-This is a GUI for the Word List Application
--------------------------------------------
+This is a GUI for the word application
+--------------------------------------
     Author: Runquan Ye
     Date: Sept/2020
--------------------------------------------
+--------------------------------------
 '''
 
 class Ui_MainWindow(object):
@@ -26,36 +26,36 @@ class Ui_MainWindow(object):
         font.setStrikeOut(False)
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
-        self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.tab)
+        self.wordLlistTab = QtWidgets.QWidget()
+        self.wordLlistTab.setObjectName("wordLlistTab")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.wordLlistTab)
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.tableWidget = QtWidgets.QTableWidget(self.tab)
-        self.tableWidget.setRowCount(16)
-        self.tableWidget.setColumnCount(7)
-        self.tableWidget.setObjectName("tableWidget")
-        self.gridLayout_2.addWidget(self.tableWidget, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.tab, "")
-        self.HeadListTab = QtWidgets.QWidget()
-        self.HeadListTab.setObjectName("HeadListTab")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.HeadListTab)
+        self.wordListTable = QtWidgets.QTableWidget(self.wordLlistTab)
+        self.wordListTable.setRowCount(16)
+        self.wordListTable.setColumnCount(7)
+        self.wordListTable.setObjectName("wordListTable")
+        self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
+        self.tabWidget.addTab(self.wordLlistTab, "")
+        self.headLlistSpanTab = QtWidgets.QWidget()
+        self.headLlistSpanTab.setObjectName("headLlistSpanTab")
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.headLlistSpanTab)
         self.gridLayout_3.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.frame = QtWidgets.QFrame(self.HeadListTab)
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.HeadSpanListTable = QtWidgets.QTableWidget(self.frame)
-        self.HeadSpanListTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
-        self.HeadSpanListTable.setRowCount(16)
-        self.HeadSpanListTable.setColumnCount(5)
-        self.HeadSpanListTable.setObjectName("HeadSpanListTable")
-        self.listWidget = QtWidgets.QListWidget(self.frame)
-        self.listWidget.setGeometry(QtCore.QRect(0, 0, 161, 501))
-        self.listWidget.setObjectName("listWidget")
-        self.gridLayout_3.addWidget(self.frame, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.HeadListTab, "")
+        self.container = QtWidgets.QFrame(self.headLlistSpanTab)
+        self.container.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.container.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.container.setObjectName("container")
+        self.headSpanTable = QtWidgets.QTableWidget(self.container)
+        self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
+        self.headSpanTable.setRowCount(16)
+        self.headSpanTable.setColumnCount(5)
+        self.headSpanTable.setObjectName("headSpanTable")
+        self.headSpanList = QtWidgets.QListWidget(self.container)
+        self.headSpanList.setGeometry(QtCore.QRect(0, 0, 161, 501))
+        self.headSpanList.setObjectName("headSpanList")
+        self.gridLayout_3.addWidget(self.container, 0, 0, 1, 1)
+        self.tabWidget.addTab(self.headLlistSpanTab, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -137,8 +137,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Word List"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.HeadListTab), _translate("MainWindow", "Head List"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordLlistTab), _translate("MainWindow", "Word List"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.headLlistSpanTab), _translate("MainWindow", "Head List"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuEdit.setTitle(_translate("MainWindow", "Edit"))
         self.menuOperation.setTitle(_translate("MainWindow", "Setting"))
