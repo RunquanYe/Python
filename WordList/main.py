@@ -5,6 +5,7 @@ from DataSourceYD import *
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from TranslateMap import *
 '''
 This is a python project for me to store English Academic Word List
 -------------------------------------------------------------------
@@ -58,7 +59,9 @@ def main(inputFile):
     print("复数: ", b.getWordPluralTerm())
     print("第三人称单数: ", b.getWordSingularTerm())
     '''
-
+    z = TranslateMap()
+    print(z.getLanguageMap()["TITLE"][0])
+    print(z.languageMape["ADD"][0])
     c = DataSourceBY("move")
     print("name: ", c.getWordName())
     print("category string: ", c.getWordCategory())

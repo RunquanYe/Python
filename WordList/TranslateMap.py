@@ -1,0 +1,45 @@
+class TranslateMap:
+    languageMape = {}
+    def __init__(self):
+        self.languageMape = {
+            "TITLE" : ["Academic Word List Application", "学术单词列表软件"],
+            "FILE" : ["File", "文件"],
+            "EDIT" : ["Edit", "编辑"],
+            "SETTING": ["Setting", "设置"],
+            "ABOUT": ["About", "关于"],
+            "OPEN": ["Open", "打开"],
+            "OPEN_TIP": ["Open File", "打开文件"],
+            "SAVE": ["Save", "保存"],
+            "SAVE_TIP": ["Save File", "保存文件"],
+            "UPDATE": ["Update", "更新"],
+            "UPDATE_TIP": ["Update Application Data", "更新应用数据"],
+            "HELP": ["Help", "帮助"],
+            "HELP_TIP": ["Application Help Instruction", "应用使用说明书"],
+            "EXIT": ["Exit", "退出"],
+            "EXIT_TIP": ["Quit Application", "关闭应用"],
+            "ABOUT_PROGRAMMER": ["About Programmer", "关于程序员"],
+            "ABOUT_PROGRAMMER_TIP": ["Show Programmer Profile", "显示程序员名片"],
+            "ABOUT_PROJECT": ["About Project", "关于应用"],
+            "ABOUT_PROJECT_TIP": ["Show Project Description", "显示项目说明"],
+            "UML_DIAGRAM": ["UML Diagram", "UML 图"],
+            "UML_DIAGRAM_TIP": ["Show Project UML Diagram", "显示应用UML图"],
+            "ADD": ["Add", "添加"],
+            "ADD_TIP": ["Add New Word", "添加新词"],
+            "DELETE": ["Delete", "删除"],
+            "DELETE_TIP": ["Delete Word", "删除词汇"],
+            "MODIFY": ["Modify", "修改"],
+            "MODIFY_TIP": ["Modify Word", "修改词汇"],
+            "UNDO": ["Undo", "撤销"],
+            "UNDO_TIP": ["Undo Last Edition", "撤消上一步修改"],
+            "REST": ["Rest", "重置"],
+            "REST_TIP": ["Rest Application Data", "重置应用数据"],
+            "SELECT_DICT": ["Select Dictionary", "选择字典"],
+            "SELECT_DICT_TIP": ["Select Source Dictionary", "选择数据来源字典"],
+            "SELECT_LANG": ["Select Language", "选择语言"],
+            "SELECT_LANG_TIP": ["Select Application Language", "选择应用语言"],
+            "WORDLIST": ["Word List", "总单词表"],
+            "HEADLIST": ["Head List", "源生词表"],
+        }
+
+    def getLanguageMap(self):
+        return self.languageMape
