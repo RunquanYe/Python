@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
     langMap = TranslateMap().getLanguageMap()
     lIndex = 1
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName(self.langMap["TITLE"][self.lIndex])
+        MainWindow.setObjectName("MainWindow")
         MainWindow.resize(731, 594)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -37,13 +37,16 @@ class Ui_MainWindow(object):
         self.gridLayout_2 = QtWidgets.QGridLayout(self.wordLlistTab)
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
+
         self.wordListTable = QtWidgets.QTableWidget(self.wordLlistTab)
         self.wordListTable.setRowCount(16)
-        self.wordListTable.setColumnCount(7)
+        self.wordListTable.setColumnCount(4)
         self.wordListTable.setObjectName("wordListTable")
-        self.wordListTable.setHorizontalHeaderLabels(['Word', 'gender', 'weight (kg)'])
+        self.wordListTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["MEANING"][self.lIndex], self.langMap["PASTTERM"][self.lIndex]])
+        self.wordListTable.setColumnWidth(2, MainWindow.width()/2)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
         self.tabWidget.addTab(self.wordLlistTab, "")
+
         self.headLlistSpanTab = QtWidgets.QWidget()
         self.headLlistSpanTab.setObjectName("headLlistSpanTab")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.headLlistSpanTab)
@@ -74,7 +77,9 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.container, 0, 0, 1, 1)
         self.tabWidget.addTab(self.headLlistSpanTab, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
+
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 731, 21))
         self.menubar.setObjectName("menubar")
@@ -153,7 +158,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", self.langMap["TITLE"][self.lIndex]))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordLlistTab), _translate("MainWindow", self.langMap["WORDLIST"][self.lIndex]))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.headLlistSpanTab), _translate("MainWindow", self.langMap["HEADLIST"][self.lIndex]))
         self.menuFile.setTitle(_translate("MainWindow", self.langMap["FILE"][self.lIndex]))
