@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
         self.wordLlistTab = QtWidgets.QWidget()
-        self.wordLlistTab.setObjectName("wordLlistTab")
+        self.wordLlistTab.setObjectName("wordListTab")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.wordLlistTab)
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
@@ -123,8 +123,7 @@ class Ui_MainWindow(object):
         self.actionSelect_Dictionary.setObjectName("actionSelect_Dictionary")
         self.actionSelect_Languary = QtWidgets.QAction(MainWindow)
         self.actionSelect_Languary.setObjectName("actionSelect_Languary")
-        self.actionUML_Diagram = QtWidgets.QAction(MainWindow)
-        self.actionUML_Diagram.setObjectName("actionUML_Diagram")
+
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionUpdate)
@@ -143,7 +142,7 @@ class Ui_MainWindow(object):
         self.menuAbout.addAction(self.actionAbout_Application)
         self.menuAbout.addAction(self.actionAbout_Programmer)
         self.menuAbout.addSeparator()
-        self.menuAbout.addAction(self.actionUML_Diagram)
+
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuEdit.menuAction())
         self.menubar.addAction(self.menuOperation.menuAction())
@@ -208,9 +207,6 @@ class Ui_MainWindow(object):
         self.actionAbout_Programmer.setShortcut(_translate("MainWindow", "Ctrl+Shift+C"))
         self.actionAbout_Application.setText(_translate("MainWindow", self.langMap["ABOUT_PROJECT"][self.lIndex]))
         self.actionAbout_Application.setToolTip(_translate("MainWindow", self.langMap["ABOUT_PROJECT_TIP"][self.lIndex]))
-        self.actionUML_Diagram.setText(_translate("MainWindow", self.langMap["UML_DIAGRAM"][self.lIndex]))
-        self.actionUML_Diagram.setToolTip(_translate("MainWindow", self.langMap["UML_DIAGRAM_TIP"][self.lIndex]))
-        self.actionUML_Diagram.setShortcut(_translate("MainWindow", "Ctrl+Shift+D"))
 
 
 if __name__ == "__main__":

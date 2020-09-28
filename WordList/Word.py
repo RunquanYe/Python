@@ -161,10 +161,13 @@ class Word():
         #{'subsidiary': {'adj': '附属的, 辅助的', 'n': '子公司, 辅助者, 支流'}}
         return {self.name.lower() : self.getMeaningDistCatString()}
 
-    # def getWordToString(self, sperator=' '):
+    # def getWordToString(self, sperator='|'):
     #     return f"{self.wordNum}{sperator}{self.name}{sperator}{self.getUSPTwTitle()}{sperator}{self.getMeaning()}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{self.listNum}"
 
-    def getWordToString(self, sep='|'):
+    def getWordDataToString(self, sperator=' | '):
+            return f"{self.name}{sperator}{self.catergory}{sperator}{self.meaning}{sperator}{self.us_pt}{sperator}{self.uk_pt}{sperator}{self.root}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{str(self.wordNum)}{sperator}{str(self.listNum)}{sperator}{str(self.isHead)}"
+
+    def getWordDocToString(self, sep='|'):
         return '{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<50}{sep}{4:{gap}^5}\n'.format(self.getWordNum(), self.getWord(), self.getUSPTwTitle(), self.getMeaningToString(), self.getListNum(), gap=' ', sep=sep)
 
 # setters

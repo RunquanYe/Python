@@ -1,0 +1,6 @@
+analyse | v | v. 分析 |  |  |  | analyser, analysis, analyst, analytical, analytically |  | 1 | 1 | True
+analyser | n | n. 分析仪, 分析员, 分析镜, 分析筛 |  |  |  |  | analyse | 2 | 1 | False
+analysis | n | n. 分析结果, （对物质成分的）分析 |  |  |  |  | analyse | 3 | 1 | False
+analyst | n | n. 分析者, 化验员 |  |  |  |  | analyse | 4 | 1 | False
+analytical | adjs | adjs. 分析的, 解析的, 分析性的, （科学）分析的 |  |  |  |  | analyse | 5 | 1 | False
+analytically | adv | adv. 在解析上, 用解析方法 |  |  |  |  | analyse | 6 | 1 | False

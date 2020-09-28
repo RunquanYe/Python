@@ -6,8 +6,12 @@ This is a customized exception class
 ------------------------------------
 '''
 
-class WordNameEmpty(Exception):
+class WordNameEmptyException(Exception):
     #Exception for empty word name string.
+    pass
+
+class EmptyFileException(Exception):
+    #Exception for empty file.
     pass
 
 '''

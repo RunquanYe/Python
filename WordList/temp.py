@@ -86,7 +86,8 @@ def main(inputFile):
         print("meaning dist: ", a.getMeaningDist())
         print("meaning catstring: ", a.getMeaningDistCatString())
         print("word meaning dist: ", a.getWordMeaningDist())
-        print("word meaning toString: ", a.getWordToString())
+        print("word meaning Doc toString: ", a.getWordDocToString())
+        print("word meaning Data toString: ", a.getWordDataToString())
         print("word list dist: ", a.getWordMeaningDistList())
         print("word catstring dist: ", a.getWordMeaningDistCatString())
 
@@ -104,4 +105,4 @@ def main(inputFile):
 
 # Start method trigger.
 if __name__ == '__main__':
-    main("inputFile.txt")
+    main("WordListData.txt")
