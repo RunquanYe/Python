@@ -40,7 +40,7 @@ class TranslateMap:
             "WORDLIST": ["Word List", "总单词表"],
             "HEADLIST": ["Head List", "源生词表"],
             "WORD": ["Word", "单词"],
-            "PT": ["Phonetic Transcription", "音标"],
+            "PT": ["Phonetic", "音标"],
             "MEANING": ["Meaning", "词意"],
             "PASTTERM": ["Past Term", "过去式"]
         }

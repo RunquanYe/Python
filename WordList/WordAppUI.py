@@ -14,7 +14,7 @@ This is a GUI for the word application
 
 class Ui_MainWindow(object):
     langMap = TranslateMap().getLanguageMap()
-    lIndex = 1
+    lIndex = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(731, 594)
@@ -42,9 +42,10 @@ class Ui_MainWindow(object):
         self.wordListTable.setRowCount(16)
         self.wordListTable.setColumnCount(4)
         self.wordListTable.setObjectName("wordListTable")
-        self.wordListTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["MEANING"][self.lIndex], self.langMap["PASTTERM"][self.lIndex]])
-        self.wordListTable.setColumnWidth(2, MainWindow.width()/2)
-        # self.wordListTable.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        self.wordListTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
+        self.wordListTable.setColumnWidth(3, MainWindow.width()/2)
+        self.wordListTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        self.wordListTable.horizontalHeader().setStretchLastSection(True);
         self.wordListTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
 
@@ -62,9 +63,10 @@ class Ui_MainWindow(object):
         self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
         self.headSpanTable.setRowCount(16)
         self.headSpanTable.setColumnCount(4)
-        self.headSpanTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["MEANING"][self.lIndex],self.langMap["PASTTERM"][self.lIndex]])
-        self.headSpanTable.setColumnWidth(2, MainWindow.width() / 2)
-        # self.headSpanTable.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        self.headSpanTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
+        self.headSpanTable.setColumnWidth(3, MainWindow.width()/3)
+        self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        self.headSpanTable.horizontalHeader().setStretchLastSection(True);
         self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.headSpanTable.setObjectName("headSpanTable")
         self.headSpanList = QtWidgets.QListWidget(self.container)

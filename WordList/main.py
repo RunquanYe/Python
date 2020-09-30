@@ -51,8 +51,8 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         for w in self.appWordlist:
             self.wordListTable.setItem(num, 0, QTableWidgetItem(str(w.getWord())))
             self.wordListTable.setItem(num, 1, QTableWidgetItem(str(w.getUSPTwTitle() if self.langIndex == 1 else w.getUSPTwETitle())))
-            self.wordListTable.setItem(num, 2, QTableWidgetItem(str(w.getMeaningToString())))
-            self.wordListTable.setItem(num, 3, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
+            self.wordListTable.setItem(num, 2, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
+            self.wordListTable.setItem(num, 3, QTableWidgetItem(str(w.getMeaningToString())))
             num += 1
 
 
