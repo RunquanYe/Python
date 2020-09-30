@@ -154,6 +154,9 @@ class Word():
     def getMeaning(self):
         return self.meaning.lower()
 
+    def getIsHead(self):
+        return self.isHead
+
     def getMeaningToString(self):
         return str('; '.join(str(e) for e in re.split('[;；]', self.meaning.lower())))
 

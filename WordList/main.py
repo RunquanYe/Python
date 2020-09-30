@@ -1,15 +1,11 @@
-from Exception import *
-from Word import *
-from DataSourceBY import *
-from DataSourceYD import *
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-from TranslateMap import *
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidgetItem
-import WordAppUI
 import sys
 from os import path, stat
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidgetItem
+from Exception import *
+from Word import *
+from TranslateMap import *
+import WordAppUI
 '''
 This is a python project for me to store English Academic Word List
 -------------------------------------------------------------------
@@ -20,9 +16,12 @@ This is a python project for me to store English Academic Word List
 
 
 class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
-    appWordlist = []
+    appWordList = []
     appWordDict = {}
+    appWordHeadList = []
+    appWordFilterList = []
     langIndex = 0
+    ptIndex = 1
     innerWordListExist = False
     innerWordDataExist = False
     def __init__(self):
@@ -39,21 +38,54 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         if path.exists("WordDictData.txt") and stat("WordDictData.txt").st_size > 0:
             self.innerWordListExist = True
 
-        if not self.appWordlist:
+        if not self.appWordList:
             if self.innerWordDataExist:
                 self.loadInnerData("WordDictData.txt", "dict")
             else:
                 self.loadInnerData("WordListData.txt", "list")
 
 
-    def loadDataTable(self):
+    def updateAllTable(self):
+        self.loadDataWLTable()
+        self.loadDataTreeLis()
+        self.loadDataHLTable(self.appWordHeadList)
+
+    def updateHeadListTab(self):
+        self.loadDataTreeLis()
+        self.loadDataHLTable(self.appWordHeadList)
+
+
+    def loadDataWLTable(self):
         num = 0
-        for w in self.appWordlist:
+        for w in self.appWordList:
             self.wordListTable.setItem(num, 0, QTableWidgetItem(str(w.getWord())))
-            self.wordListTable.setItem(num, 1, QTableWidgetItem(str(w.getUSPTwTitle() if self.langIndex == 1 else w.getUSPTwETitle())))
+            self.wordListTable.setItem(num, 1, QTableWidgetItem(str(w.getUSPTwTitle() if self.langIndex == 1 else w.getUSPTwETitle()) if self.ptIndex == 0 else str(w.getUKPTwTitle() if self.langIndex == 1 else w.getUKPTwETitle())))
             self.wordListTable.setItem(num, 2, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
             self.wordListTable.setItem(num, 3, QTableWidgetItem(str(w.getMeaningToString())))
             num += 1
+
+
+    def loadDataHLTable(self, targetList):
+        displayList = targetList
+        num = 0
+        for w in displayList:
+            self.headSpanTable.setItem(num, 0, QTableWidgetItem(str(w.getWord())))
+            self.headSpanTable.setItem(num, 1, QTableWidgetItem(str(w.getUSPTwTitle() if self.langIndex == 1 else w.getUSPTwETitle()) if self.ptIndex == 0 else str(w.getUKPTwTitle() if self.langIndex == 1 else w.getUKPTwETitle())))
+            self.headSpanTable.setItem(num, 2, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
+            self.headSpanTable.setItem(num, 3, QTableWidgetItem(str(w.getMeaningToString())))
+            num += 1
+
+
+    def loadDataTreeLis(self):
+        for w in self.appWordList:
+            if w.getIsHead():
+                tempHead = self.StandardItem(w.getWord(), 16, set_bold=True)
+                self.rootNode.appendRow(tempHead)
+            else:
+                tempNode = self.StandardItem(w.getWord(), 14)
+                tempHead.appendRow(tempNode)
+            # self.rootNode.appendRow(tempHead)
+            # self.headSpanTree.setModel(self.treeModel)
 
 
     def loadInnerData(self, inputFile, method):
@@ -76,19 +108,22 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                         for vocably in wordlist:
                             print(wordnum, ": ",vocably)
                             word = Word(str(vocably).rstrip(), '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
-                            self.appWordlist.append(word)
+                            self.appWordList.append(word)
                             self.appWordDict.update({word.getWord(): word.getWordDictData()})
+                            if wordlist.index(vocably) == 0:
+                                self.appWordHeadList.append(word)
                             wordnum += 1
                     elif "dict" in str(method).lower():
                         # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
                         data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
                         word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10])
-                        self.appWordlist.append(word)
+                        self.appWordList.append(word)
                         self.appWordDict.update({word.getWord():word.getWordDictData()})
-                # print([i.getWord() for i in self.appWordlist])
+                        if data[10]:
+                            self.appWordHeadList.append(word)
+                # print([i.getWord() for i in self.appWordList])
                 # print(self.appWordDict)
-                self.loadDataTable()
-
+                self.updateAllTable()
             except OSError as err:
                 print("OS error: {0}".format(err))
                 pass

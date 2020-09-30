@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QStandardItemModel, QFont, QColor, QStandardItem
 from PyQt5.QtWidgets import QSplitter, QHBoxLayout, QTableWidget, QAbstractItemView
 from TranslateMap import *
 
@@ -17,7 +18,7 @@ class Ui_MainWindow(object):
     lIndex = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(731, 594)
+        MainWindow.resize(750, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -50,12 +51,13 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.wordListTab, "")
-        self.headLlistSpanTab = QtWidgets.QWidget()
-        self.headLlistSpanTab.setObjectName("headLlistSpanTab")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.headLlistSpanTab)
-        self.gridLayout_3.setContentsMargins(8, 5, 8, 8)
+        self.headListSpanTab = QtWidgets.QWidget()
+        self.headListSpanTab.setObjectName("headListSpanTab")
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.headListSpanTab)
+        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
+        # self.gridLayout_3.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.container = QtWidgets.QFrame(self.headLlistSpanTab)
+        self.container = QtWidgets.QFrame(self.headListSpanTab)
         self.container.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.container.setFrameShadow(QtWidgets.QFrame.Raised)
         self.container.setObjectName("container")
@@ -69,21 +71,27 @@ class Ui_MainWindow(object):
         self.headSpanTable.horizontalHeader().setStretchLastSection(True);
         self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.headSpanTable.setObjectName("headSpanTable")
-        self.headSpanList = QtWidgets.QListWidget(self.container)
-        self.headSpanList.setGeometry(QtCore.QRect(0, 0, 161, 501))
-        self.headSpanList.setObjectName("headSpanList")
+
+        self.headSpanTree = QtWidgets.QTreeView(self.container)
+        self.headSpanTree.setObjectName("headSpanTree")
+        self.headSpanTree.setGeometry(QtCore.QRect(0, 0, 90, 501))
+        self.treeModel = QStandardItemModel()
+        self.rootNode = self.treeModel.invisibleRootItem()
+        self.headSpanTree.setHeaderHidden(True)
+        self.headSpanTree.setModel(self.treeModel)
+        self.headSpanTree.expandAll()
 
         #add the splitter
         hbox = QHBoxLayout()
         splitter = QSplitter(Qt.Horizontal)
-        splitter.addWidget(self.headSpanList)
+        splitter.addWidget(self.headSpanTree)
         splitter.addWidget(self.headSpanTable)
-        splitter.setSizes([100, 200])
+        splitter.setSizes([75, 250])
         hbox.addWidget(splitter)
         self.container.setLayout(hbox)
 
         self.gridLayout_3.addWidget(self.container, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.headLlistSpanTab, "")
+        self.tabWidget.addTab(self.headListSpanTab, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -167,7 +175,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", self.langMap["TITLE"][self.lIndex]))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordListTab), _translate("MainWindow", self.langMap["WORDLIST"][self.lIndex]))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.headLlistSpanTab), _translate("MainWindow", self.langMap["HEADLIST"][self.lIndex]))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.headListSpanTab), _translate("MainWindow", self.langMap["HEADLIST"][self.lIndex]))
         self.menuFile.setTitle(_translate("MainWindow", self.langMap["FILE"][self.lIndex]))
         self.menuEdit.setTitle(_translate("MainWindow", self.langMap["EDIT"][self.lIndex]))
         self.menuOperation.setTitle(_translate("MainWindow", self.langMap["SETTING"][self.lIndex]))
@@ -215,6 +223,18 @@ class Ui_MainWindow(object):
         self.actionAbout_Programmer.setShortcut(_translate("MainWindow", "Ctrl+Shift+C"))
         self.actionAbout_Application.setText(_translate("MainWindow", self.langMap["ABOUT_PROJECT"][self.lIndex]))
         self.actionAbout_Application.setToolTip(_translate("MainWindow", self.langMap["ABOUT_PROJECT_TIP"][self.lIndex]))
+
+
+    def StandardItem(self, txt='', font_size=12, set_bold=False, color=QColor(0, 0, 0)):
+        fnt = QFont('Arial', font_size)
+        fnt.setBold(set_bold)
+
+        node = QStandardItem()
+        node.setEditable(False)
+        node.setForeground(color)
+        node.setFont(fnt)
+        node.setText(txt)
+        return node
 
 
     def getLangIndex(self):
