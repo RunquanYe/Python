@@ -32,13 +32,13 @@ class Ui_MainWindow(object):
         font.setStrikeOut(False)
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
-        self.wordLlistTab = QtWidgets.QWidget()
-        self.wordLlistTab.setObjectName("wordListTab")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.wordLlistTab)
+        self.wordListTab = QtWidgets.QWidget()
+        self.wordListTab.setObjectName("wordListTab")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.wordListTab)
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
 
-        self.wordListTable = QtWidgets.QTableWidget(self.wordLlistTab)
+        self.wordListTable = QtWidgets.QTableWidget(self.wordListTab)
         self.wordListTable.setRowCount(16)
         self.wordListTable.setColumnCount(4)
         self.wordListTable.setObjectName("wordListTable")
@@ -48,7 +48,7 @@ class Ui_MainWindow(object):
         self.wordListTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
 
-        self.tabWidget.addTab(self.wordLlistTab, "")
+        self.tabWidget.addTab(self.wordListTab, "")
         self.headLlistSpanTab = QtWidgets.QWidget()
         self.headLlistSpanTab.setObjectName("headLlistSpanTab")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.headLlistSpanTab)
@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", self.langMap["TITLE"][self.lIndex]))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordLlistTab), _translate("MainWindow", self.langMap["WORDLIST"][self.lIndex]))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordListTab), _translate("MainWindow", self.langMap["WORDLIST"][self.lIndex]))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.headLlistSpanTab), _translate("MainWindow", self.langMap["HEADLIST"][self.lIndex]))
         self.menuFile.setTitle(_translate("MainWindow", self.langMap["FILE"][self.lIndex]))
         self.menuEdit.setTitle(_translate("MainWindow", self.langMap["EDIT"][self.lIndex]))
@@ -213,6 +213,15 @@ class Ui_MainWindow(object):
         self.actionAbout_Programmer.setShortcut(_translate("MainWindow", "Ctrl+Shift+C"))
         self.actionAbout_Application.setText(_translate("MainWindow", self.langMap["ABOUT_PROJECT"][self.lIndex]))
         self.actionAbout_Application.setToolTip(_translate("MainWindow", self.langMap["ABOUT_PROJECT_TIP"][self.lIndex]))
+
+
+    def getLangIndex(self):
+        return self.lIndex
+
+
+    def setLangIndex(self, index):
+        if int(index) > 0:
+            self.listNum = int(index)
 
 
 if __name__ == "__main__":

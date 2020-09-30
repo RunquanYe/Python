@@ -6,7 +6,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from TranslateMap import *
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidgetItem
 import WordAppUI
 import sys
 from os import path, stat
@@ -22,28 +22,38 @@ This is a python project for me to store English Academic Word List
 class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
     appWordlist = []
     appWordDict = {}
-    wordnum = 0
+    langIndex = 0
     innerWordListExist = False
     innerWordDataExist = False
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.show()
+        self.langIndex = self.lIndex
 
 
     def loadInnerData(self):
         if path.exists("WordListData.txt") and stat("WordListData.txt").st_size > 0:
             self.innerWordListExist = True
 
-        if path.exists("WordDistData.txt") and stat("WordDistData.txt").st_size > 0:
+        if path.exists("WordDictData.txt") and stat("WordDictData.txt").st_size > 0:
             self.innerWordListExist = True
 
         if not self.appWordlist:
             if self.innerWordDataExist:
-                self.loadInnerData("WordDistData.txt", "dict")
+                self.loadInnerData("WordDictData.txt", "dict")
             else:
                 self.loadInnerData("WordListData.txt", "list")
 
+
+    def loadDataTable(self):
+        num = 0
+        for w in self.appWordlist:
+            self.wordListTable.setItem(num, 0, QTableWidgetItem(str(w.getWord())))
+            self.wordListTable.setItem(num, 1, QTableWidgetItem(str(w.getUSPTwTitle() if self.langIndex == 1 else w.getUSPTwETitle())))
+            self.wordListTable.setItem(num, 2, QTableWidgetItem(str(w.getMeaningToString())))
+            self.wordListTable.setItem(num, 3, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
+            num += 1
 
 
     def loadInnerData(self, inputFile, method):
@@ -56,20 +66,26 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
             try:
                 for l in lines:
+                    word = None
+                    wordnum = 0
                     if "list" in str(method).lower():
                         rawData = l.split(' ')
                         listNum = rawData[0]
                         wordlist = rawData[1:]
                         for vocably in wordlist:
-                            self.wordnum += 1
-                            a = Word(vocably, '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', self.wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
+                            wordnum += 1
+                            word = Word(vocably, '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
+                            self.appWordlist.append(word)
+                            self.appWordDict.update({word.getWord(): word.getWordDictData()})
                     elif "dict" in str(method).lower():
                         # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
                         data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
                         word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10])
-
-
-
+                        self.appWordlist.append(word)
+                        self.appWordDict.update({word.getWord():word.getWordDictData()})
+                print([i.getWord() for i in self.appWordlist])
+                print(self.appWordDict)
+                self.loadDataTable()
 
             except OSError as err:
                 print("OS error: {0}".format(err))
@@ -114,7 +130,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 def main():
     application = QApplication(sys.argv)
     app = WordListApplication()
-    app.loadInnerData("WordListData.txt", "list")
+    app.loadInnerData("WordDictData.txt", "dict")
     sys.exit(application.exec_())
 
 

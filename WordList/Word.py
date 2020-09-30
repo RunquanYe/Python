@@ -192,6 +192,10 @@ class Word():
     def getWordDocToString(self, sep='|'):
         return '{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<50}{sep}{4:{gap}^5}\n'.format(self.getWordNum(), self.getWord(), self.getUSPTwTitle(), self.getMeaningToString(), self.getListNum(), gap=' ', sep=sep)
 
+    def getWordDictData(self):
+        return [self.catergory, self.meaning, self.us_pt, self.uk_pt, self.root, self.derivativeWord, self.sourceWord, str(self.wordNum), str(self.listNum), str(self.isHead)]
+
+
 # setters
     def setCatergory(self, catergory):
         if bool(catergory and catergory.strip()):
