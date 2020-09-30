@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QSplitter, QHBoxLayout
+from PyQt5.QtWidgets import QSplitter, QHBoxLayout, QTableWidget, QAbstractItemView
 from TranslateMap import *
 
 '''
@@ -44,9 +44,11 @@ class Ui_MainWindow(object):
         self.wordListTable.setObjectName("wordListTable")
         self.wordListTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["MEANING"][self.lIndex], self.langMap["PASTTERM"][self.lIndex]])
         self.wordListTable.setColumnWidth(2, MainWindow.width()/2)
+        self.wordListTable.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        self.wordListTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.wordLlistTab, "")
 
+        self.tabWidget.addTab(self.wordLlistTab, "")
         self.headLlistSpanTab = QtWidgets.QWidget()
         self.headLlistSpanTab.setObjectName("headLlistSpanTab")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.headLlistSpanTab)
@@ -59,7 +61,11 @@ class Ui_MainWindow(object):
         self.headSpanTable = QtWidgets.QTableWidget(self.container)
         self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
         self.headSpanTable.setRowCount(16)
-        self.headSpanTable.setColumnCount(5)
+        self.headSpanTable.setColumnCount(4)
+        self.headSpanTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["MEANING"][self.lIndex],self.langMap["PASTTERM"][self.lIndex]])
+        self.headSpanTable.setColumnWidth(2, MainWindow.width() / 2)
+        self.headSpanTable.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.headSpanTable.setObjectName("headSpanTable")
         self.headSpanList = QtWidgets.QListWidget(self.container)
         self.headSpanList.setGeometry(QtCore.QRect(0, 0, 161, 501))

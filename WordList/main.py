@@ -31,7 +31,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.show()
 
 
-    def loadData(self):
+    def loadInnerData(self):
         if path.exists("WordListData.txt") and stat("WordListData.txt").st_size > 0:
             self.innerWordListExist = True
 
@@ -40,13 +40,13 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
         if not self.appWordlist:
             if self.innerWordDataExist:
-                self.loadFile("WordDistData.txt", "dict")
-            if self.innerWordListExist:
-                self.loadFile("WordListData.txt", "list")
+                self.loadInnerData("WordDistData.txt", "dict")
+            else:
+                self.loadInnerData("WordListData.txt", "list")
 
 
 
-    def loadFile(self, inputFile, method):
+    def loadInnerData(self, inputFile, method):
         # open file in the read mode
         infile = open(inputFile, "r")
 
@@ -62,15 +62,13 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                         wordlist = rawData[1:]
                         for vocably in wordlist:
                             self.wordnum += 1
-                            a = Word(vocably, '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', self.wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
-                            print(a.getWordDataToString())
+                            a = Word(vocably, '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', self.wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
                     elif "dict" in str(method).lower():
-                        rawData = l.split('|')
+                        # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
+                        data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
+                        word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10])
 
-                        word = Word(vocably, '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '',
-                                    wordlist[0] if wordlist.index(vocably) != 1 else '', self.wordnum, listNum,
-                                    True if wordlist.index(vocably) == 0 else False)
-                        print(word.getWordToString())
+
 
 
             except OSError as err:
@@ -116,8 +114,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 def main():
     application = QApplication(sys.argv)
     app = WordListApplication()
-    app.loadFile("WordListData.txt", "list")
-    app.saveFile("outputFile.txt")
+    app.loadInnerData("WordListData.txt", "list")
     sys.exit(application.exec_())
 
 

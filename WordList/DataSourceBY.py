@@ -14,6 +14,8 @@ class DataSourceBY():
     # 词名，词类，词意，美音标，英音标, 词类list，词意list
     dName, dCatergory, dMeaning, dUs_pt, dUk_pt, dCatergoryList, dMeaningList = '', '', '', '', '', [], []
 
+    modeName = "Bing"
+
     def __init__(self, word):
         if bool(word and word.strip()):
             self.dName = word.lower()
@@ -86,3 +88,6 @@ class DataSourceBY():
 
     def getWordMeaningList(self):
         return self.dMeaningList
+
+    def getModeName(self):
+        return self.modeName

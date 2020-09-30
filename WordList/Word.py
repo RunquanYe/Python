@@ -2,6 +2,7 @@ import re
 import json
 import Exception
 from DataSourceBY import *
+from DataSourceYD import *
 '''
 This is a class for Word and its attributes
 -------------------------------------------
@@ -16,7 +17,7 @@ class Word():
     name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', '', '', 0, 0, False
     onlineSource = None
 
-    def __init__(self, name, catergory, meaning, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
+    def __init__(self, name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
 
         if bool(name and name.strip()):
             self.name = name.lower()
@@ -27,7 +28,7 @@ class Word():
         if bool(meaning and meaning.strip()):
             self.meaning = meaning
         else:
-            self.meaning = DataSourceBY(self.name).getWordMeaning()
+            self.meaning = self.onlineSource.getWordMeaning()
 
         if bool(catergory and catergory.strip()):
             self.catergory = catergory.lower()
@@ -36,6 +37,16 @@ class Word():
                 self.catergory = ', '.join(str(e) for e in [i[0] for i in self.getMeaningList()]).lower()
             else:
                 self.catergory = self.onlineSource.getWordCategory()
+
+        if bool(us_pt and us_pt.strip()):
+            self.us_pt = us_pt
+        else:
+            self.us_pt = self.onlineSource.getWordDataUSPT()
+
+        if bool(uk_pt and uk_pt.strip()):
+            self.uk_pt = uk_pt
+        else:
+            self.uk_pt = self.onlineSource.getWordDataUKPT()
 
         if bool(root and root.strip()):
             self.root = root.lower()
@@ -62,6 +73,14 @@ class Word():
             self.isHead = json.loads(isHead.lower())
 
 
+# methods
+    def soureModeSwitchUpdate(self):
+        self.setMeaning(self.onlineSource.getWordMeaning())
+        self.setCatergoryInList(self.getMeaningList())
+        self.setUKPT(self.onlineSource.getWordDataUKPT())
+        self.setUSPT(self.onlineSource.getWordDataUSPT())
+
+
 #getters
     def getWord(self):
         return self.name.lower()
@@ -77,6 +96,9 @@ class Word():
         #'n., Adj. ,vt., v' => 'adj, n, v, vt'
         sortList = self.getCatergoryList()
         return ', '.join([str(e) for e in sortList]).lower()
+
+    def getOnlineSourceMode(self):
+        return self.onlineSource.getModeName()
 
     def getUSPT(self):
         if not bool(self.us_pt and self.us_pt.strip()):
@@ -178,6 +200,12 @@ class Word():
     def setCatergoryInList(self, catergoryList):
         if catergoryList:
             self.catergory = ', '.join(str(i).lower() for i in sorted(catergoryList))
+
+    def setOnlineSourceMode(self, modeString):
+        if modeString.strip().lower() == "yd" or "youdao" in modeString.strip().lower():
+            self.onlineSource = DataSourceYD(self.name)
+        else:
+            self.onlineSource = DataSourceBY(self.name)
 
     def setUSPT(self, us_pt):
         if bool(us_pt and us_pt.strip()):

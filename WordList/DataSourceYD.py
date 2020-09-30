@@ -16,6 +16,8 @@ class DataSourceYD():
     # 过去式，过去分词，现在分词，复数，第三人称单数
     pastTerm, pastParticipleTerm, presentParticipleTerm, pluralTerm, singularTerm = '', '', '', '', ''
 
+    modeName = "YouDao"
+
     def __init__(self, word):
         if bool(word and word.strip()):
             self.dName = word.lower()
@@ -98,3 +100,6 @@ class DataSourceYD():
     
     def getWordSingularTerm(self):
         return self.singularTerm.lower()
+
+    def getModeName(self):
+        return self.modeName
