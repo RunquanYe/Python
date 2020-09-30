@@ -65,26 +65,28 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
             lines = infile.readlines()
 
             try:
+                wordnum = 1
                 for l in lines:
                     word = None
-                    wordnum = 0
+                    re.sub(r"^\s+|\s+$", "", str(l))
                     if "list" in str(method).lower():
                         rawData = l.split(' ')
                         listNum = rawData[0]
                         wordlist = rawData[1:]
                         for vocably in wordlist:
-                            wordnum += 1
-                            word = Word(vocably, '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
+                            print(wordnum, ": ",vocably)
+                            word = Word(str(vocably).rstrip(), '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
                             self.appWordlist.append(word)
                             self.appWordDict.update({word.getWord(): word.getWordDictData()})
+                            wordnum += 1
                     elif "dict" in str(method).lower():
                         # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
                         data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
                         word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10])
                         self.appWordlist.append(word)
                         self.appWordDict.update({word.getWord():word.getWordDictData()})
-                print([i.getWord() for i in self.appWordlist])
-                print(self.appWordDict)
+                # print([i.getWord() for i in self.appWordlist])
+                # print(self.appWordDict)
                 self.loadDataTable()
 
             except OSError as err:
@@ -130,7 +132,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 def main():
     application = QApplication(sys.argv)
     app = WordListApplication()
-    app.loadInnerData("WordDictData.txt", "dict")
+    app.loadInnerData("WordListData.txt", "list")
     sys.exit(application.exec_())
 
 
