@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     lIndex = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(750, 600)
+        MainWindow.resize(850, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -39,15 +39,20 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
 
+        # self.wordListTable = QtWidgets.QTableView(self.wordListTab)
         self.wordListTable = QtWidgets.QTableWidget(self.wordListTab)
+        # self.wordListTable.showRow(16)
         self.wordListTable.setRowCount(16)
+        # self.wordListTable.showColumn(4)
         self.wordListTable.setColumnCount(4)
         self.wordListTable.setObjectName("wordListTable")
+        # self.wordListTable.setHorizontalHeader([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
         self.wordListTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
         self.wordListTable.setColumnWidth(3, MainWindow.width()/2)
         self.wordListTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.wordListTable.horizontalHeader().setStretchLastSection(True);
         self.wordListTable.setSelectionBehavior(QAbstractItemView.SelectRows)
+        # self.wordListTable.setEnabled(False)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.wordListTab, "")
@@ -70,6 +75,7 @@ class Ui_MainWindow(object):
         self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.headSpanTable.horizontalHeader().setStretchLastSection(True);
         self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.headSpanTable.setEnabled(False)
         self.headSpanTable.setObjectName("headSpanTable")
 
         self.headSpanTree = QtWidgets.QTreeView(self.container)
@@ -234,6 +240,7 @@ class Ui_MainWindow(object):
         node.setForeground(color)
         node.setFont(fnt)
         node.setText(txt)
+        node.setCheckable(True)
         return node
 
 

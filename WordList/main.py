@@ -1,7 +1,7 @@
 import sys
 from os import path, stat
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidgetItem
 from Exception import *
 from Word import *
