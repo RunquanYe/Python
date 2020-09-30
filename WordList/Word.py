@@ -14,10 +14,10 @@ This is a class for Word and its attributes
 class Word():
 #constructor
     #词名，词类，词意，美音标，英音标，词根，派生词，源生词，词号，词表号，是否源生词
-    name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', '', '', 0, 0, False
+    name, catergory, meaning, us_pt, uk_pt, root, passTerm, derivativeWord, sourceWord, wordNum, listNum, isHead = '', '', '', '', '', '', '', '', '', 0, 0, False
     onlineSource = None
 
-    def __init__(self, name, catergory, meaning, us_pt, uk_pt, root, derivativeWord, sourceWord, wordNum, listNum, isHead):
+    def __init__(self, name, catergory, meaning, us_pt, uk_pt, root, passTerm, derivativeWord, sourceWord, wordNum, listNum, isHead):
 
         if bool(name and name.strip()):
             self.name = name.lower()
@@ -50,6 +50,11 @@ class Word():
 
         if bool(root and root.strip()):
             self.root = root.lower()
+
+        if bool(passTerm and passTerm.strip()):
+            self.passTerm = passTerm
+        else:
+            self.passTerm = DataSourceYD(self.name).getWordPastTerm()
 
         if type(derivativeWord) is list:
             if derivativeWord != None:
@@ -110,34 +115,14 @@ class Word():
             self.uk_pt = self.onlineSource.getWordDataUKPT()
         return self.uk_pt
 
-    def getUSPTwTitle(self):
-        if not bool(self.us_pt and self.us_pt.strip()):
-            self.us_pt = self.onlineSource.getWordDataUSPT()
-        return  '美' + self.us_pt if bool(self.us_pt and self.us_pt.strip()) else ''
-
-    def getUSPTwETitle(self):
-        if not bool(self.us_pt and self.us_pt.strip()):
-            self.us_pt = self.onlineSource.getWordDataUSPT()
-        return 'US ' + self.us_pt if bool(self.us_pt and self.us_pt.strip()) else ''
-
-    def getUKPTwTitle(self):
-        if not bool(self.uk_pt and self.uk_pt.strip()):
-            self.uk_pt = self.onlineSource.getWordDataUKPT()
-        return '英' + self.uk_pt if bool(self.uk_pt and self.uk_pt.strip()) else ''
-
-    def getUKPTwETitle(self):
-        if not bool(self.uk_pt and self.uk_pt.strip()):
-            self.uk_pt = self.onlineSource.getWordDataUKPT()
-        return 'UK ' + self.uk_pt if bool(self.uk_pt and self.uk_pt.strip()) else ''
-
     def getRoot(self):
         return self.root.lower()
 
-    def getDerivativeWord(self):
+    def getDerivativeWordString(self):
         return self.derivativeWord.lower()
 
     def getDerivativeWordList(self):
-        return sorted(list(filter(None, list(re.split('[,.;，； ]', self.derivativeWord.lower())))))
+        return sorted(list(filter(None, list(re.split('[,.;，； ]', self.getDerivativeWordString())))))
 
     def getSourceWord(self):
         return self.sourceWord.lower()
@@ -157,8 +142,13 @@ class Word():
     def getIsHead(self):
         return self.isHead
 
+    def getPassTerm(self):
+        if not bool(self.passTerm and self.passTerm.strip()):
+            self.passTerm = DataSourceYD(self.name).getWordPastTerm()
+        return self.passTerm
+
     def getMeaningToString(self):
-        return str('; '.join(str(e) for e in re.split('[;；]', self.meaning.lower())))
+        return str('; '.join(str(e) for e in re.split('[;；]', self.getMeaning())))
 
     def getMeaningList(self):
         #adj. 附属的, 辅助的; n. 子公司, 辅助者, 支流' => ['adj. 附属的, 辅助的', ' n. 子公司, 辅助者, 支流']
@@ -190,13 +180,13 @@ class Word():
     #     return f"{self.wordNum}{sperator}{self.name}{sperator}{self.getUSPTwTitle()}{sperator}{self.getMeaning()}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{self.listNum}"
 
     def getWordDataToString(self, sperator=' | '):
-            return f"{self.name}{sperator}{self.catergory}{sperator}{self.meaning}{sperator}{self.us_pt}{sperator}{self.uk_pt}{sperator}{self.root}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{str(self.wordNum)}{sperator}{str(self.listNum)}{sperator}{str(self.isHead)}"
+            return f"{self.name}{sperator}{self.catergory}{sperator}{self.meaning}{sperator}{self.us_pt}{sperator}{self.uk_pt}{sperator}{self.root}{sperator}{self.passTerm}{sperator}{self.derivativeWord}{sperator}{self.sourceWord}{sperator}{str(self.wordNum)}{sperator}{str(self.listNum)}{sperator}{str(self.isHead)}"
 
     def getWordDocToString(self, sep='|'):
         return '{0:{gap}^5}{sep}{1:{gap}<13}{sep}{2:{gap}<21}{sep}{3:{gap}<50}{sep}{4:{gap}^5}\n'.format(self.getWordNum(), self.getWord(), self.getUSPTwTitle(), self.getMeaningToString(), self.getListNum(), gap=' ', sep=sep)
 
     def getWordDictData(self):
-        return [self.catergory, self.meaning, self.us_pt, self.uk_pt, self.root, self.derivativeWord, self.sourceWord, str(self.wordNum), str(self.listNum), str(self.isHead)]
+        return [self.catergory, self.meaning, self.us_pt, self.uk_pt, self.root, self.passTerm, self.derivativeWord, self.sourceWord, str(self.wordNum), str(self.listNum), str(self.isHead)]
 
 
 # setters
@@ -249,3 +239,7 @@ class Word():
     def setMeaning(self, meaning):
         if bool(meaning and meaning.strip()):
             self.meaning = meaning
+
+    def setPassTerm(self, passTerm):
+        if bool(passTerm and passTerm.strip()):
+            self.passTerm = passTerm

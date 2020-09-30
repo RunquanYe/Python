@@ -42,7 +42,9 @@ class TranslateMap:
             "WORD": ["Word", "单词"],
             "PT": ["Phonetic", "音标"],
             "MEANING": ["Meaning", "词意"],
-            "PASTTERM": ["Past Term", "过去式"]
+            "PASTTERM": ["Past Term", "过去式"],
+            "USPT_Title": ["US", "美"],
+            "UKPT_Title": ["UK", "英"]
         }
 
     def getLanguageMap(self):
