@@ -103,3 +103,7 @@ class DataSourceYD():
 
     def getModeName(self):
         return self.modeName
+
+    # YD online word audio:
+    # UK: http://dict.youdao.com/dictvoice?audio=job&type=1
+    # US: http://dict.youdao.com/dictvoice?audio=job&type=2

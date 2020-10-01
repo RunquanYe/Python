@@ -91,3 +91,37 @@ class DataSourceBY():
 
     def getModeName(self):
         return self.modeName
+
+    # Bing online word audio:
+    '''
+    UK
+    <div class="client_daily_word_pn_audio">
+                      <div class="client_icon_container">
+                        <a
+                          class="client_aud_o"
+                          title="Click to listen"
+                          onmouseover="BilingualDict.Click(this,'https://dictionary.blob.core.chinacloudapi.cn/media/audio/george/fe/b9/FEB9E4F442858E3672BC4580843B9915.mp3','akicon.png',false,'dictionaryvoiceid')"
+                          onClick="BilingualDict.Click(this,'https://dictionary.blob.core.chinacloudapi.cn/media/audio/george/fe/b9/FEB9E4F442858E3672BC4580843B9915.mp3','akicon.png',false,'dictionaryvoiceid')"
+                          href="javascript:void(0)"
+                          h="ID=Dictionary,5094.1"
+                        ></a>
+                      </div>
+                    </div>
+    '''
+
+    '''
+    US 
+                        <div class="client_daily_word_pn_audio">
+                      <div class="client_icon_container">
+                        <a
+                          class="client_aud_o"
+                          onmouseout="this.className='client_aud_o'"
+                          title="Click to listen"
+                          onmouseover="BilingualDict.Click(this,'https://dictionary.blob.core.chinacloudapi.cn/media/audio/tom/fe/b9/FEB9E4F442858E3672BC4580843B9915.mp3','akicon.png',false,'dictionaryvoiceid')"
+                          onClick="BilingualDict.Click(this,'https://dictionary.blob.core.chinacloudapi.cn/media/audio/tom/fe/b9/FEB9E4F442858E3672BC4580843B9915.mp3','akicon.png',false,'dictionaryvoiceid')"
+                          href="javascript:void(0)"
+                          h="ID=Dictionary,5093.1"
+                        ></a>
+                      </div>
+                    </div>
+    '''

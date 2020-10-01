@@ -4,7 +4,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QFont, QColor, QStandardItem
 from PyQt5.QtWidgets import QSplitter, QHBoxLayout, QTableWidget, QAbstractItemView
 from TranslateMap import *
-
+from TableViewMode import *
+import sys
 '''
 This is a GUI for the word application
 --------------------------------------
@@ -39,20 +40,16 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
 
-        # self.wordListTable = QtWidgets.QTableView(self.wordListTab)
-        self.wordListTable = QtWidgets.QTableWidget(self.wordListTab)
-        # self.wordListTable.showRow(16)
-        self.wordListTable.setRowCount(16)
-        # self.wordListTable.showColumn(4)
-        self.wordListTable.setColumnCount(4)
+        self.wordListTable = QtWidgets.QTableView(self.wordListTab)
+        data = []
+
+        self.model = TableViewModel(data)
+        self.wordListTable.setModel(self.model)
+
         self.wordListTable.setObjectName("wordListTable")
-        # self.wordListTable.setHorizontalHeader([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
-        self.wordListTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
-        self.wordListTable.setColumnWidth(3, MainWindow.width()/2)
         self.wordListTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.wordListTable.horizontalHeader().setStretchLastSection(True);
         self.wordListTable.setSelectionBehavior(QAbstractItemView.SelectRows)
-        # self.wordListTable.setEnabled(False)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
 
         self.tabWidget.addTab(self.wordListTab, "")
@@ -66,17 +63,29 @@ class Ui_MainWindow(object):
         self.container.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.container.setFrameShadow(QtWidgets.QFrame.Raised)
         self.container.setObjectName("container")
-        self.headSpanTable = QtWidgets.QTableWidget(self.container)
+
+        self.headSpanTable = QtWidgets.QTableView(self.container)
         self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
-        self.headSpanTable.setRowCount(16)
-        self.headSpanTable.setColumnCount(4)
-        self.headSpanTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
-        self.headSpanTable.setColumnWidth(3, MainWindow.width()/3)
+        data = []
+        self.model = TableViewModel(data)
+        self.headSpanTable.setModel(self.model)
+        self.headSpanTable.setObjectName("headSpanTable")
+        self.headSpanTable.setColumnWidth(3, MainWindow.width() / 3)
         self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.headSpanTable.horizontalHeader().setStretchLastSection(True);
         self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.headSpanTable.setEnabled(False)
-        self.headSpanTable.setObjectName("headSpanTable")
+
+        # self.headSpanTable = QtWidgets.QTableWidget(self.container)
+        # self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
+        # self.headSpanTable.setRowCount(16)
+        # self.headSpanTable.setColumnCount(4)
+        # self.headSpanTable.setHorizontalHeaderLabels([self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]])
+        # self.headSpanTable.setColumnWidth(3, MainWindow.width()/3)
+        # self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        # self.headSpanTable.horizontalHeader().setStretchLastSection(True);
+        # self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
+        # self.headSpanTable.setEnabled(False)
+        # self.headSpanTable.setObjectName("headSpanTable")
 
         self.headSpanTree = QtWidgets.QTreeView(self.container)
         self.headSpanTree.setObjectName("headSpanTree")
@@ -254,7 +263,6 @@ class Ui_MainWindow(object):
 
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
