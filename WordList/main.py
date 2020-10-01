@@ -50,27 +50,36 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
     def updateAllTable(self):
         self.loadDataWLTable()
         self.loadDataTreeLis()
-        self.loadDataHLTable()
+        self.loadDataHLTable(0)
 
     def updateHeadListTab(self):
         self.loadDataTreeLis()
-        self.loadDataHLTable(self.appWordHeadList, 0)
+        self.loadDataHLTable(1)
 
 
     def loadDataWLTable(self):
         displayWordList = []
         for w in self.appWordList:
-            displayWordList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][self.langIndex])+ str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
+            displayWordList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] + " " + w.getUSPT()) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
         self.wordListTableData = displayWordList
         self.wordListTableModel = TableViewModel(self.wordListTableData)
         self.wordListTable.setModel(self.wordListTableModel)
         # self.wordListTable.repaint()
 
 
-    def loadDataHLTable(self):
-        displayHeadList = []
-        for w in self.appWordHeadList:
-            displayHeadList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][self.langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
+    def loadDataHLTable(self, method):
+        if method == 0:
+            displayHeadList = []
+            for w in self.appWordHeadList:
+                displayHeadList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex]  + " " + w.getUSPT()) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
+        elif method == 1:
+            displayHeadList = []
+            for w in self.appWordHeadList:
+                displayHeadList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] + " " + self.appWordDict[subWord][2]) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + self.appWordDict[subWord][3]), self.appWordDict[subWord][5], self.appWordDict[subWord][1]])
+                for subWord in w.getDerivativeWordList():
+                    displayHeadList.append([subWord, str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][
+                self.langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
+
         self.headSpanTableData = displayHeadList
         self.headSpanTableModel = TableViewModel(self.headSpanTableData)
         self.headSpanTable.setModel(self.headSpanTableModel)
