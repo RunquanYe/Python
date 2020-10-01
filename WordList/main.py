@@ -4,6 +4,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QColor, QBrush
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTableWidgetItem
 from Exception import *
+from TableViewMode import TableViewModel
 from Word import *
 from TranslateMap import *
 import WordAppUI
@@ -47,44 +48,32 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
 
     def updateAllTable(self):
-        # self.loadDataWLTable()
+        self.loadDataWLTable()
         self.loadDataTreeLis()
-        # self.loadDataHLTable(self.appWordHeadList, 0)
+        self.loadDataHLTable()
 
     def updateHeadListTab(self):
         self.loadDataTreeLis()
         self.loadDataHLTable(self.appWordHeadList, 0)
 
 
-    # def loadDataWLTable(self):
-    #     num = 0
-    #     for w in self.appWordList:
-    #         self.wordListTable.setItem(num, 0, QTableWidgetItem(str(w.getWord())))
-    #         self.wordListTable.setItem(num, 1, QTableWidgetItem(str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][self.langIndex])+ str(" " + w.getUSPT())))
-    #         self.wordListTable.setItem(num, 2, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
-    #         self.wordListTable.setItem(num, 3, QTableWidgetItem(str(w.getMeaningToString())))
-    #         num += 1
+    def loadDataWLTable(self):
+        displayWordList = []
+        for w in self.appWordList:
+            displayWordList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][self.langIndex])+ str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
+        self.wordListTableData = displayWordList
+        self.wordListTableModel = TableViewModel(self.wordListTableData)
+        self.wordListTable.setModel(self.wordListTableModel)
+        # self.wordListTable.repaint()
 
 
-    # def loadDataHLTable(self, targetList, method):
-    #     if method == 0:
-    #         displayList = targetList
-    #         num = 0
-    #         for w in displayList:
-    #             self.headSpanTable.setItem(num, 0, QTableWidgetItem(str(w.getWord())))
-    #             self.headSpanTable.setItem(num, 1, QTableWidgetItem(str(self.langMap["USPT_Title"][self.langIndex] + " " + w.getUSPT()) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + w.getUKPT())))
-    #             self.headSpanTable.setItem(num, 2, QTableWidgetItem(str(DataSourceYD(w.getWord()).getWordPastTerm())))
-    #             self.headSpanTable.setItem(num, 3, QTableWidgetItem(str(w.getMeaningToString())))
-    #             num += 1
-    #     elif method == 1:
-    #         displayList = targetList
-    #         num = 0
-    #         for wname in displayList:
-    #             self.headSpanTable.setItem(num, 0, QTableWidgetItem(str(wname)))
-    #             self.headSpanTable.setItem(num, 1, QTableWidgetItem(str(self.langMap["USPT_Title"][self.langIndex]  + " " + self.appWordDict[wname][2]) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + self.appWordDict[wname][3])))
-    #             self.headSpanTable.setItem(num, 2, QTableWidgetItem(self.appWordDict[wname][5]))
-    #             self.headSpanTable.setItem(num, 3, QTableWidgetItem(self.appWordDict[wname][1]))
-    #             num += 1
+    def loadDataHLTable(self):
+        displayHeadList = []
+        for w in self.appWordHeadList:
+            displayHeadList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][self.langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
+        self.headSpanTableData = displayHeadList
+        self.headSpanTableModel = TableViewModel(self.headSpanTableData)
+        self.headSpanTable.setModel(self.headSpanTableModel)
 
 
     def loadDataTreeLis(self):

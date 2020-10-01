@@ -41,11 +41,9 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
 
         self.wordListTable = QtWidgets.QTableView(self.wordListTab)
-        data = []
-
-        self.model = TableViewModel(data)
-        self.wordListTable.setModel(self.model)
-
+        # self.wordListTableData = []
+        # self.wordListTableModel = TableViewModel(self.wordListTableData)
+        # self.wordListTable.setModel(self.wordListTableModel)
         self.wordListTable.setObjectName("wordListTable")
         self.wordListTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.wordListTable.horizontalHeader().setStretchLastSection(True);
@@ -66,9 +64,9 @@ class Ui_MainWindow(object):
 
         self.headSpanTable = QtWidgets.QTableView(self.container)
         self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
-        data = []
-        self.model = TableViewModel(data)
-        self.headSpanTable.setModel(self.model)
+        self.headSpanTableData = []
+        self.headSpanTableModel = TableViewModel(self.headSpanTableData)
+        self.headSpanTable.setModel(self.headSpanTableModel)
         self.headSpanTable.setObjectName("headSpanTable")
         self.headSpanTable.setColumnWidth(3, MainWindow.width() / 3)
         self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
