@@ -62,8 +62,9 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         for w in self.appWordList:
             displayWordList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] + " " + w.getUSPT()) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
         self.wordListTableData = displayWordList
-        self.wordListTableModel = TableViewModel(self.wordListTableData)
+        self.wordListTableModel = TableViewModel(self.wordListTableData, [i.getWord() for i in self.appWordHeadList])
         self.wordListTable.setModel(self.wordListTableModel)
+        self.wordListTable.doubleClicked.connect(self.on_clickWLTable)
         # self.wordListTable.repaint()
 
 
@@ -81,18 +82,18 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                 self.langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
 
         self.headSpanTableData = displayHeadList
-        self.headSpanTableModel = TableViewModel(self.headSpanTableData)
+        self.headSpanTableModel = TableViewModel(self.headSpanTableData, self.appWordHeadList)
         self.headSpanTable.setModel(self.headSpanTableModel)
 
 
     def loadDataTreeLis(self):
         for w in self.appWordList:
             if w.getIsHead():
-                tempHead = self.StandardItem(w.getWord(), 16, set_bold=True, color=QColor(155, 0, 0))
+                tempHead = self.CustomTreedItem(w.getWord(), 16, set_bold=True, color=QColor(155, 0, 0))
                 # tempHead.mousePressEvent(self, self.loadDataHLTable(list(str(w.getWord() + ", " + w.getDerivativeWordString()).split(', ')), 1))
                 self.rootNode.appendRow(tempHead)
             else:
-                tempNode = self.StandardItem(w.getWord(), 14)
+                tempNode = self.CustomTreedItem(w.getWord(), 14)
                 tempHead.appendRow(tempNode)
 
 
@@ -114,7 +115,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                         listNum = rawData[0]
                         wordlist = rawData[1:]
                         for vocably in wordlist:
-                            print(wordnum, ": ",vocably)
+                            # print(wordnum, ": ",vocably)
                             word = Word(str(vocably).rstrip(), '', '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
                             self.appWordList.append(word)
                             self.appWordDict.update({word.getWord(): word.getWordDictData()})
@@ -170,6 +171,19 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
         # close files
         outfile.close()
+
+
+    def on_clickWLTable(self, signal):
+        row = signal.row()  # RETRIEVES ROW OF CELL THAT WAS DOUBLE CLICKED
+        column = signal.column()  # RETRIEVES COLUMN OF CELL THAT WAS DOUBLE CLICKED
+        cell_dict = self.wordListTableModel.itemData(signal)  # RETURNS DICT VALUE OF SIGNAL
+        cell_value = cell_dict.get(0)  # RETRIEVE VALUE FROM DICT
+
+        index = signal.sibling(row, 0)
+        index_dict = self.wordListTableModel.itemData(index)
+        index_value = index_dict.get(0)
+        print(
+            'Row {}, Column {} clicked - value: {}\nColumn 1 contents: {}'.format(row, column, cell_value, index_value))
 
 
 def main():

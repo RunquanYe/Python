@@ -1,4 +1,4 @@
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt
 from TranslateMap import *
 
@@ -13,7 +13,8 @@ This is a class for table mode
 class TableViewModel(QtCore.QAbstractTableModel):
     langMap = TranslateMap().getLanguageMap()
     lIndex = 0
-    def __init__(self, data):
+    tableModeHeadList = []
+    def __init__(self, data, tableModeHeadList):
         super(TableViewModel, self).__init__()
         self._data = data
 
@@ -23,6 +24,9 @@ class TableViewModel(QtCore.QAbstractTableModel):
             # .row() indexes into the outer list,
             # .column() indexes into the sub-list
             return self._data[index.row()][index.column()]
+        if role == Qt.ForegroundRole:
+            if self._data[index.row()][0] == "analysis":
+                return QtGui.QColor('red')
 
     def rowCount(self, index):
         # The length of the outer list.
@@ -39,6 +43,12 @@ class TableViewModel(QtCore.QAbstractTableModel):
 
             if orientation == Qt.Vertical:
                 return section + 1
+
+    def getTableModeHeadList(self):
+        return self.tableModeHeadList
+
+    def setTableModeHeadList(self, headList):
+        self.tableModeHeadList = headList
 
     def getLangIndex(self):
         return self.lIndex
