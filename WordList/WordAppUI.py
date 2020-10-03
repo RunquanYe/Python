@@ -70,6 +70,7 @@ class Ui_MainWindow(object):
         self.headSpanTree = QtWidgets.QTreeView(self.container)
         self.headSpanTree.setObjectName("headSpanTree")
         self.headSpanTree.setGeometry(QtCore.QRect(0, 0, 90, 501))
+        self.headSpanTree.setMinimumWidth(50)
         self.treeModel = QStandardItemModel()
         self.rootNode = self.treeModel.invisibleRootItem()
         self.headSpanTree.setHeaderHidden(True)
@@ -82,6 +83,7 @@ class Ui_MainWindow(object):
         splitter.addWidget(self.headSpanTree)
         splitter.addWidget(self.headSpanTable)
         splitter.setSizes([75, 250])
+        splitter.setCollapsible(0, False)
         hbox.addWidget(splitter)
         self.container.setLayout(hbox)
 
