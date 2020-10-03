@@ -2,7 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QFont, QColor, QStandardItem
-from PyQt5.QtWidgets import QSplitter, QHBoxLayout, QTableWidget, QAbstractItemView
+from PyQt5.QtWidgets import QSplitter, QHBoxLayout, QTableWidget, QAbstractItemView, QLabel
 from TranslateMap import *
 from TableViewMode import *
 import sys
@@ -17,6 +17,7 @@ This is a GUI for the word application
 class Ui_MainWindow(object):
     _langMap = TranslateMap().getLanguageMap()
     _lIndex = 0
+    _onlineSource = "Bing"
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(850, 600)
@@ -32,6 +33,8 @@ class Ui_MainWindow(object):
         font.setUnderline(False)
         font.setWeight(50)
         font.setStrikeOut(False)
+
+        # tabWidget and wordListTab
         self.tabWidget.setFont(font)
         self.tabWidget.setObjectName("tabWidget")
         self.wordListTab = QtWidgets.QWidget()
@@ -40,14 +43,16 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(8, 5, 8, 8)
         self.gridLayout_2.setObjectName("gridLayout_2")
 
+        # wordListTable
         self.wordListTable = QtWidgets.QTableView(self.wordListTab)
         self.wordListTable.setObjectName("wordListTable")
         self.wordListTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.wordListTable.horizontalHeader().setStretchLastSection(True);
         self.wordListTable.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.gridLayout_2.addWidget(self.wordListTable, 0, 0, 1, 1)
-
         self.tabWidget.addTab(self.wordListTab, "")
+
+        # headListSpanTab
         self.headListSpanTab = QtWidgets.QWidget()
         self.headListSpanTab.setObjectName("headListSpanTab")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.headListSpanTab)
@@ -59,14 +64,17 @@ class Ui_MainWindow(object):
         self.container.setFrameShadow(QtWidgets.QFrame.Raised)
         self.container.setObjectName("container")
 
+        # headSpanTable
         self.headSpanTable = QtWidgets.QTableView(self.container)
+        self.headSpanTable.setMinimumWidth(35 * MainWindow.width() / 50)
         self.headSpanTable.setGeometry(QtCore.QRect(170, 0, 541, 501))
         self.headSpanTable.setObjectName("headSpanTable")
         self.headSpanTable.setColumnWidth(3, MainWindow.width() / 3)
-        self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.headSpanTable.horizontalHeader().setStretchLastSection(True);
+        self.headSpanTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.headSpanTable.setSelectionBehavior(QAbstractItemView.SelectRows)
 
+        # headSpanTree
         self.headSpanTree = QtWidgets.QTreeView(self.container)
         self.headSpanTree.setObjectName("headSpanTree")
         self.headSpanTree.setGeometry(QtCore.QRect(0, 0, 90, 501))
@@ -84,12 +92,15 @@ class Ui_MainWindow(object):
         splitter.addWidget(self.headSpanTable)
         splitter.setSizes([75, 250])
         splitter.setCollapsible(0, False)
+        splitter.setCollapsible(1, False)
         hbox.addWidget(splitter)
+        hbox.setContentsMargins(7, 0, 7, 5)
         self.container.setLayout(hbox)
 
         self.gridLayout_3.addWidget(self.container, 0, 0, 1, 1)
         self.tabWidget.addTab(self.headListSpanTab, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
+        self.tabWidget.setCurrentIndex(0)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -104,10 +115,7 @@ class Ui_MainWindow(object):
         self.menuOperation.setObjectName("menuOperation")
         self.menuAbout = QtWidgets.QMenu(self.menubar)
         self.menuAbout.setObjectName("menuAbout")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+
         self.actionOpen = QtWidgets.QAction(MainWindow)
         self.actionOpen.setObjectName("actionOpen")
         self.actionSave = QtWidgets.QAction(MainWindow)
@@ -164,8 +172,22 @@ class Ui_MainWindow(object):
         # add button listener
         # self.actionOpen.triggered.connect(lambda pass)
 
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        self.status_Internet = QLabel('Wifi Connection: ' + 'on')
+        self.status_Lang = QLabel('Language: ' + ('中文' if self._lIndex == 1 else 'English'))
+        self.status_Dictionary = QLabel('Dictionary Source: ' + ('YD' if self._onlineSource == "YouDao" else 'BY'))
+
+        self.status_Lang.setAlignment(QtCore.Qt.AlignCenter)
+        self.status_Dictionary.setAlignment(QtCore.Qt.AlignRight)
+
+        self.statusbar.addPermanentWidget(self.status_Internet, stretch=1)
+        self.statusbar.addPermanentWidget(self.status_Lang, stretch=1)
+        self.statusbar.addPermanentWidget(self.status_Dictionary, stretch=1)
+        MainWindow.setStatusBar(self.statusbar)
+
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -242,6 +264,15 @@ class Ui_MainWindow(object):
     def setLangIndex(self, index):
         if int(index) > 0:
             self._lIndex = int(index)
+
+
+    def getOnlineSource(self):
+        return self._onlineSource
+
+
+    def setOnlineSource(self, onlineSource):
+        if bool(onlineSource and onlineSource.strip()):
+            self._onlineSource = onlineSource
 
 
 if __name__ == "__main__":
