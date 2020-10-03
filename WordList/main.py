@@ -21,6 +21,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
     _appWordList = []
     _appWordDict = {}
     _appWordHeadList = []
+    _appWordHeadListName = []
     _appWordFilterList = []
     _langIndex = 0
     _ptIndex = 0
@@ -63,7 +64,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         for w in self._appWordList:
             displayWordList.append([w.getWord(), str(self._langMap["USPT_Title"][self._langIndex] + " " + w.getUSPT()) if self._ptIndex == 0 else str(self._langMap["UKPT_Title"][self._langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
         self.wordListTableData = displayWordList
-        self.wordListTableModel = TableViewModel(self.wordListTableData, [i.getWord() for i in self._appWordHeadList])
+        self.wordListTableModel = TableViewModel(self.wordListTableData, self._appWordHeadListName)
         self.wordListTable.setModel(self.wordListTableModel)
         self.wordListTable.doubleClicked.connect(self.on_clickWLTable)
         # self.wordListTable.repaint()
@@ -83,14 +84,16 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                 self._langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
 
         self.headSpanTableData = displayHeadList
-        self.headSpanTableModel = TableViewModel(self.headSpanTableData, self._appWordHeadList)
+        self.headSpanTableModel = TableViewModel(self.headSpanTableData, self._appWordHeadListName)
+        self.headSpanTableModel.setHeadWordColor(QColor(204, 0, 204))
         self.headSpanTable.setModel(self.headSpanTableModel)
+        self.headSpanTable.doubleClicked.connect(self.on_clickWLTable)
 
 
     def loadDataTreeLis(self):
         for w in self._appWordList:
             if w.getIsHead():
-                tempHead = self.CustomTreedItem(w.getWord(), 16, set_bold=True, color=QColor(155, 0, 0))
+                tempHead = self.CustomTreedItem(w.getWord(), 16, set_bold=True, color=QColor(0, 0, 204))
                 # tempHead.mousePressEvent(self, self.loadDataHLTable(list(str(w.getWord() + ", " + w.getDerivativeWordString()).split(', ')), 1))
                 self.rootNode.appendRow(tempHead)
             else:
@@ -133,6 +136,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                             self._appWordHeadList.append(word)
                 # print([i.getWord() for i in self._appWordList])
                 # print(self._appWordDict)
+                self._appWordHeadListName = [i.getWord() for i in self._appWordHeadList]
                 self.updateAllTable()
             except OSError as err:
                 print("OS error: {0}".format(err))
