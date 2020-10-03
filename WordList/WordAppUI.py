@@ -177,7 +177,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         self.status_Internet = QLabel('Wifi Connection: ' + 'on')
         self.status_Lang = QLabel('Language: ' + ('中文' if self._lIndex == 1 else 'English'))
-        self.status_Dictionary = QLabel('Dictionary Source: ' + ('YD' if self._onlineSource == "YouDao" else 'BY'))
+        self.status_Dictionary = QLabel('Dictionary Source: ' + ('A' if self._onlineSource == "YouDao" else 'B'))
 
         self.status_Lang.setAlignment(QtCore.Qt.AlignCenter)
         self.status_Dictionary.setAlignment(QtCore.Qt.AlignRight)
