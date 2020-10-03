@@ -182,8 +182,7 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         index = signal.sibling(row, 0)
         index_dict = self.wordListTableModel.itemData(index)
         index_value = index_dict.get(0)
-        print(
-            'Row {}, Column {} clicked - value: {}\nColumn 1 contents: {}'.format(row, column, cell_value, index_value))
+        print('Column 1 contents: {}'.format(index_value))
 
 
 def main():
