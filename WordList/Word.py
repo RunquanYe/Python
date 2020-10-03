@@ -17,7 +17,7 @@ class Word():
     _name, _catergory, _meaning, _us_pt, _uk_pt, _root, _passTerm, _derivativeWord, _sourceWord, _wordNum, _listNum, _isHead = '', '', '', '', '', '', '', '', '', 0, 0, False
     _onlineSource = None
 
-    def __init__(self, _name, _catergory, _meaning, _us_pt, _uk_pt, _root, _passTerm, _derivativeWord, _sourceWord, _wordNum, _listNum, _isHead):
+    def __init__(self, _name, _catergory="", _meaning="", _us_pt="", _uk_pt="", _root="", _passTerm="", _derivativeWord="", _sourceWord="", _wordNum=0, _listNum=1, _isHead=False):
 
         if bool(_name and _name.strip()):
             self._name = _name.lower()
