@@ -11,12 +11,15 @@ This is a class for table mode
 '''
 
 class TableViewModel(QtCore.QAbstractTableModel):
-    langMap = TranslateMap().getLanguageMap()
-    lIndex = 0
-    tableModeHeadList = []
+    _langMap = TranslateMap().getLanguageMap()
+    _lIndex = 0
+    _tableModeHeadList = []
+    _headWordColor = QtGui.QColor('red')
+    _subWordColor = QtGui.QColor('black')
     def __init__(self, data, tableModeHeadList):
         super(TableViewModel, self).__init__()
         self._data = data
+        self._tableModeHeadList = tableModeHeadList
 
     def data(self, index, role):
         if role == Qt.DisplayRole:
@@ -25,8 +28,10 @@ class TableViewModel(QtCore.QAbstractTableModel):
             # .column() indexes into the sub-list
             return self._data[index.row()][index.column()]
         if role == Qt.ForegroundRole:
-            if self._data[index.row()][0] == "analysis":
-                return QtGui.QColor('red')
+            if self._data[index.row()][0] in self._tableModeHeadList:
+                return self._headWordColor
+            else:
+                return self._subWordColor
 
     def rowCount(self, index):
         # The length of the outer list.
@@ -39,21 +44,34 @@ class TableViewModel(QtCore.QAbstractTableModel):
         # section is the index of the column/row.
         if role == Qt.DisplayRole:
             if orientation == Qt.Horizontal:
-                return [self.langMap["WORD"][self.lIndex], self.langMap["PT"][self.lIndex], self.langMap["PASTTERM"][self.lIndex], self.langMap["MEANING"][self.lIndex]][section]
+                return [self._langMap["WORD"][self._lIndex], self._langMap["PT"][self._lIndex], self._langMap["PASTTERM"][self._lIndex], self._langMap["MEANING"][self._lIndex]][section]
 
             if orientation == Qt.Vertical:
                 return section + 1
 
+
     def getTableModeHeadList(self):
-        return self.tableModeHeadList
+        return self._tableModeHeadList
+
 
     def setTableModeHeadList(self, headList):
-        self.tableModeHeadList = headList
+        self._tableModeHeadList = headList
+
 
     def getLangIndex(self):
-        return self.lIndex
+        return self._lIndex
 
 
     def setLangIndex(self, index):
         if int(index) > 0:
-            self.listNum = int(index)
+            self._listNum = int(index)
+
+
+    def setHeadWordColor(self, headColor):
+        if QtGui.QColor(headColor) and QtGui.QColor(headColor).getRgb() != self._headWordColor.getRgb():
+            self._headWordColor = QtGui.QColor(headColor)
+
+
+    def setSubWordColor(self, subColor):
+        if QtGui.QColor(subColor) and QtGui.QColor(subColor).getRgb() != self._subWordColor.getRgb():
+            self._subWordColor = QtGui.QColor(subColor)

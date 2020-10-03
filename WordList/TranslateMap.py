@@ -1,7 +1,7 @@
 class TranslateMap:
-    languageMape = {}
+    _languageMape = {}
     def __init__(self):
-        self.languageMape = {
+        self._languageMape = {
             "TITLE" : ["Academic Word List Application", "学术单词列表软件"],
             "FILE" : ["File", "文件"],
             "EDIT" : ["Edit", "编辑"],
@@ -48,4 +48,4 @@ class TranslateMap:
         }
 
     def getLanguageMap(self):
-        return self.languageMape
+        return self._languageMape

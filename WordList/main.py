@@ -18,30 +18,31 @@ This is a python project for me to store English Academic Word List
 
 
 class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
-    appWordList = []
-    appWordDict = {}
-    appWordHeadList = []
-    appWordFilterList = []
-    langIndex = 0
-    ptIndex = 0
-    innerWordListExist = False
-    innerWordDataExist = False
+    _appWordList = []
+    _appWordDict = {}
+    _appWordHeadList = []
+    _appWordFilterList = []
+    _langIndex = 0
+    _ptIndex = 0
+    _innerWordListExist = False
+    _innerWordDataExist = False
+    _langMap = TranslateMap().getLanguageMap()
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.show()
-        self.langIndex = self.lIndex
+        self._langIndex = self.getLangIndex()
 
 
     def loadInnerData(self):
         if path.exists("WordListData.txt") and stat("WordListData.txt").st_size > 0:
-            self.innerWordListExist = True
+            self._innerWordListExist = True
 
         if path.exists("WordDictData.txt") and stat("WordDictData.txt").st_size > 0:
-            self.innerWordListExist = True
+            self._innerWordListExist = True
 
-        if not self.appWordList:
-            if self.innerWordDataExist:
+        if not self._appWordList:
+            if self._innerWordDataExist:
                 self.loadInnerData("WordDictData.txt", "dict")
             else:
                 self.loadInnerData("WordListData.txt", "list")
@@ -59,10 +60,10 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
     def loadDataWLTable(self):
         displayWordList = []
-        for w in self.appWordList:
-            displayWordList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] + " " + w.getUSPT()) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
+        for w in self._appWordList:
+            displayWordList.append([w.getWord(), str(self._langMap["USPT_Title"][self._langIndex] + " " + w.getUSPT()) if self._ptIndex == 0 else str(self._langMap["UKPT_Title"][self._langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
         self.wordListTableData = displayWordList
-        self.wordListTableModel = TableViewModel(self.wordListTableData, [i.getWord() for i in self.appWordHeadList])
+        self.wordListTableModel = TableViewModel(self.wordListTableData, [i.getWord() for i in self._appWordHeadList])
         self.wordListTable.setModel(self.wordListTableModel)
         self.wordListTable.doubleClicked.connect(self.on_clickWLTable)
         # self.wordListTable.repaint()
@@ -71,23 +72,23 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
     def loadDataHLTable(self, method):
         if method == 0:
             displayHeadList = []
-            for w in self.appWordHeadList:
-                displayHeadList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex]  + " " + w.getUSPT()) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
+            for w in self._appWordHeadList:
+                displayHeadList.append([w.getWord(), str(self._langMap["USPT_Title"][self._langIndex]  + " " + w.getUSPT()) if self._ptIndex == 0 else str(self._langMap["UKPT_Title"][self._langIndex] + " " + w.getUKPT()), w.getPassTerm(), w.getMeaningToString()])
         elif method == 1:
             displayHeadList = []
-            for w in self.appWordHeadList:
-                displayHeadList.append([w.getWord(), str(self.langMap["USPT_Title"][self.langIndex] + " " + self.appWordDict[subWord][2]) if self.ptIndex == 0 else str(self.langMap["UKPT_Title"][self.langIndex] + " " + self.appWordDict[subWord][3]), self.appWordDict[subWord][5], self.appWordDict[subWord][1]])
+            for w in self._appWordHeadList:
+                displayHeadList.append([w.getWord(), str(self._langMap["USPT_Title"][self._langIndex] + " " + self._appWordDict[subWord][2]) if self._ptIndex == 0 else str(self._langMap["UKPT_Title"][self._langIndex] + " " + self._appWordDict[subWord][3]), self._appWordDict[subWord][5], self._appWordDict[subWord][1]])
                 for subWord in w.getDerivativeWordList():
-                    displayHeadList.append([subWord, str(self.langMap["USPT_Title"][self.langIndex] if self.ptIndex == 0 else self.langMap["UKPT_Title"][
-                self.langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
+                    displayHeadList.append([subWord, str(self._langMap["USPT_Title"][self._langIndex] if self._ptIndex == 0 else self._langMap["UKPT_Title"][
+                self._langIndex]) + str(" " + w.getUSPT()), w.getPassTerm(), w.getMeaningToString()])
 
         self.headSpanTableData = displayHeadList
-        self.headSpanTableModel = TableViewModel(self.headSpanTableData, self.appWordHeadList)
+        self.headSpanTableModel = TableViewModel(self.headSpanTableData, self._appWordHeadList)
         self.headSpanTable.setModel(self.headSpanTableModel)
 
 
     def loadDataTreeLis(self):
-        for w in self.appWordList:
+        for w in self._appWordList:
             if w.getIsHead():
                 tempHead = self.CustomTreedItem(w.getWord(), 16, set_bold=True, color=QColor(155, 0, 0))
                 # tempHead.mousePressEvent(self, self.loadDataHLTable(list(str(w.getWord() + ", " + w.getDerivativeWordString()).split(', ')), 1))
@@ -117,21 +118,21 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                         for vocably in wordlist:
                             # print(wordnum, ": ",vocably)
                             word = Word(str(vocably).rstrip(), '', '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
-                            self.appWordList.append(word)
-                            self.appWordDict.update({word.getWord(): word.getWordDictData()})
+                            self._appWordList.append(word)
+                            self._appWordDict.update({word.getWord(): word.getWordDictData()})
                             if wordlist.index(vocably) == 0:
-                                self.appWordHeadList.append(word)
+                                self._appWordHeadList.append(word)
                             wordnum += 1
                     elif "dict" in str(method).lower():
                         # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
                         data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
                         word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11])
-                        self.appWordList.append(word)
-                        self.appWordDict.update({word.getWord():word.getWordDictData()})
+                        self._appWordList.append(word)
+                        self._appWordDict.update({word.getWord():word.getWordDictData()})
                         if data[10]:
-                            self.appWordHeadList.append(word)
-                # print([i.getWord() for i in self.appWordList])
-                # print(self.appWordDict)
+                            self._appWordHeadList.append(word)
+                # print([i.getWord() for i in self._appWordList])
+                # print(self._appWordDict)
                 self.updateAllTable()
             except OSError as err:
                 print("OS error: {0}".format(err))

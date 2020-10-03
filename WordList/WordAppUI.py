@@ -15,8 +15,8 @@ This is a GUI for the word application
 '''
 
 class Ui_MainWindow(object):
-    langMap = TranslateMap().getLanguageMap()
-    lIndex = 0
+    _langMap = TranslateMap().getLanguageMap()
+    _lIndex = 0
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(850, 600)
@@ -168,56 +168,56 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", self.langMap["TITLE"][self.lIndex]))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordListTab), _translate("MainWindow", self.langMap["WORDLIST"][self.lIndex]))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.headListSpanTab), _translate("MainWindow", self.langMap["HEADLIST"][self.lIndex]))
-        self.menuFile.setTitle(_translate("MainWindow", self.langMap["FILE"][self.lIndex]))
-        self.menuEdit.setTitle(_translate("MainWindow", self.langMap["EDIT"][self.lIndex]))
-        self.menuOperation.setTitle(_translate("MainWindow", self.langMap["SETTING"][self.lIndex]))
-        self.menuAbout.setTitle(_translate("MainWindow", self.langMap["ABOUT"][self.lIndex]))
-        self.actionOpen.setText(_translate("MainWindow", self.langMap["OPEN"][self.lIndex]))
-        self.actionOpen.setToolTip(_translate("MainWindow", self.langMap["OPEN_TIP"][self.lIndex]))
+        MainWindow.setWindowTitle(_translate("MainWindow", self._langMap["TITLE"][self._lIndex]))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.wordListTab), _translate("MainWindow", self._langMap["WORDLIST"][self._lIndex]))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.headListSpanTab), _translate("MainWindow", self._langMap["HEADLIST"][self._lIndex]))
+        self.menuFile.setTitle(_translate("MainWindow", self._langMap["FILE"][self._lIndex]))
+        self.menuEdit.setTitle(_translate("MainWindow", self._langMap["EDIT"][self._lIndex]))
+        self.menuOperation.setTitle(_translate("MainWindow", self._langMap["SETTING"][self._lIndex]))
+        self.menuAbout.setTitle(_translate("MainWindow", self._langMap["ABOUT"][self._lIndex]))
+        self.actionOpen.setText(_translate("MainWindow", self._langMap["OPEN"][self._lIndex]))
+        self.actionOpen.setToolTip(_translate("MainWindow", self._langMap["OPEN_TIP"][self._lIndex]))
         self.actionOpen.setShortcut(_translate("MainWindow", "Ctrl+O"))
-        self.actionSave.setText(_translate("MainWindow", self.langMap["SAVE"][self.lIndex]))
-        self.actionSave.setToolTip(_translate("MainWindow", self.langMap["SAVE_TIP"][self.lIndex]))
+        self.actionSave.setText(_translate("MainWindow", self._langMap["SAVE"][self._lIndex]))
+        self.actionSave.setToolTip(_translate("MainWindow", self._langMap["SAVE_TIP"][self._lIndex]))
         self.actionSave.setShortcut(_translate("MainWindow", "Ctrl+S"))
-        self.actionUpdate.setText(_translate("MainWindow", self.langMap["UPDATE"][self.lIndex]))
-        self.actionUpdate.setToolTip(_translate("MainWindow", self.langMap["UPDATE_TIP"][self.lIndex]))
+        self.actionUpdate.setText(_translate("MainWindow", self._langMap["UPDATE"][self._lIndex]))
+        self.actionUpdate.setToolTip(_translate("MainWindow", self._langMap["UPDATE_TIP"][self._lIndex]))
         self.actionUpdate.setShortcut(_translate("MainWindow", "Ctrl+U"))
-        self.actionHelp.setText(_translate("MainWindow", self.langMap["HELP"][self.lIndex]))
-        self.actionHelp.setToolTip(_translate("MainWindow", self.langMap["HELP_TIP"][self.lIndex]))
+        self.actionHelp.setText(_translate("MainWindow", self._langMap["HELP"][self._lIndex]))
+        self.actionHelp.setToolTip(_translate("MainWindow", self._langMap["HELP_TIP"][self._lIndex]))
         self.actionHelp.setShortcut(_translate("MainWindow", "Ctrl+H"))
-        self.actionExit.setText(_translate("MainWindow", self.langMap["EXIT"][self.lIndex]))
-        self.actionExit.setToolTip(_translate("MainWindow", self.langMap["EXIT_TIP"][self.lIndex]))
+        self.actionExit.setText(_translate("MainWindow", self._langMap["EXIT"][self._lIndex]))
+        self.actionExit.setToolTip(_translate("MainWindow", self._langMap["EXIT_TIP"][self._lIndex]))
         self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Alt+F4"))
 
         self.actionAbout_Application.setShortcut(_translate("MainWindow", "Ctrl+Shift+P"))
-        self.actionAdd.setText(_translate("MainWindow", self.langMap["ADD"][self.lIndex]))
-        self.actionAdd.setToolTip(_translate("MainWindow", self.langMap["ADD_TIP"][self.lIndex]))
+        self.actionAdd.setText(_translate("MainWindow", self._langMap["ADD"][self._lIndex]))
+        self.actionAdd.setToolTip(_translate("MainWindow", self._langMap["ADD_TIP"][self._lIndex]))
         self.actionAdd.setShortcut(_translate("MainWindow", "Ctrl+Alt+A"))
-        self.actionDelete.setText(_translate("MainWindow", self.langMap["DELETE"][self.lIndex]))
-        self.actionDelete.setToolTip(_translate("MainWindow", self.langMap["DELETE_TIP"][self.lIndex]))
+        self.actionDelete.setText(_translate("MainWindow", self._langMap["DELETE"][self._lIndex]))
+        self.actionDelete.setToolTip(_translate("MainWindow", self._langMap["DELETE_TIP"][self._lIndex]))
         self.actionDelete.setShortcut(_translate("MainWindow", "Ctrl+Alt+D"))
-        self.actionModify.setText(_translate("MainWindow", self.langMap["MODIFY"][self.lIndex]))
-        self.actionModify.setToolTip(_translate("MainWindow", self.langMap["MODIFY_TIP"][self.lIndex]))
+        self.actionModify.setText(_translate("MainWindow", self._langMap["MODIFY"][self._lIndex]))
+        self.actionModify.setToolTip(_translate("MainWindow", self._langMap["MODIFY_TIP"][self._lIndex]))
         self.actionModify.setShortcut(_translate("MainWindow", "Ctrl+Alt+M"))
-        self.actionUndo.setText(_translate("MainWindow", self.langMap["UNDO"][self.lIndex]))
-        self.actionUndo.setToolTip(_translate("MainWindow", self.langMap["UNDO_TIP"][self.lIndex]))
+        self.actionUndo.setText(_translate("MainWindow", self._langMap["UNDO"][self._lIndex]))
+        self.actionUndo.setToolTip(_translate("MainWindow", self._langMap["UNDO_TIP"][self._lIndex]))
         self.actionUndo.setShortcut(_translate("MainWindow", "Ctrl+Alt+U"))
-        self.actionReset.setText(_translate("MainWindow", self.langMap["REST"][self.lIndex]))
-        self.actionReset.setToolTip(_translate("MainWindow", self.langMap["REST_TIP"][self.lIndex]))
+        self.actionReset.setText(_translate("MainWindow", self._langMap["REST"][self._lIndex]))
+        self.actionReset.setToolTip(_translate("MainWindow", self._langMap["REST_TIP"][self._lIndex]))
         self.actionReset.setShortcut(_translate("MainWindow", "Ctrl+Alt+R"))
-        self.actionSelect_Dictionary.setText(_translate("MainWindow", self.langMap["SELECT_DICT"][self.lIndex]))
-        self.actionSelect_Dictionary.setToolTip(_translate("MainWindow", self.langMap["SELECT_DICT_TIP"][self.lIndex]))
+        self.actionSelect_Dictionary.setText(_translate("MainWindow", self._langMap["SELECT_DICT"][self._lIndex]))
+        self.actionSelect_Dictionary.setToolTip(_translate("MainWindow", self._langMap["SELECT_DICT_TIP"][self._lIndex]))
         self.actionSelect_Dictionary.setShortcut(_translate("MainWindow", "Ctrl+Alt+E"))
-        self.actionSelect_Languary.setText(_translate("MainWindow", self.langMap["SELECT_LANG"][self.lIndex]))
-        self.actionSelect_Languary.setToolTip(_translate("MainWindow", self.langMap["SELECT_LANG_TIP"][self.lIndex]))
+        self.actionSelect_Languary.setText(_translate("MainWindow", self._langMap["SELECT_LANG"][self._lIndex]))
+        self.actionSelect_Languary.setToolTip(_translate("MainWindow", self._langMap["SELECT_LANG_TIP"][self._lIndex]))
         self.actionSelect_Languary.setShortcut(_translate("MainWindow", "Ctrl+Alt+L"))
-        self.actionAbout_Programmer.setText(_translate("MainWindow", self.langMap["ABOUT_PROGRAMMER"][self.lIndex]))
-        self.actionAbout_Programmer.setToolTip(_translate("MainWindow", self.langMap["ABOUT_PROGRAMMER_TIP"][self.lIndex]))
+        self.actionAbout_Programmer.setText(_translate("MainWindow", self._langMap["ABOUT_PROGRAMMER"][self._lIndex]))
+        self.actionAbout_Programmer.setToolTip(_translate("MainWindow", self._langMap["ABOUT_PROGRAMMER_TIP"][self._lIndex]))
         self.actionAbout_Programmer.setShortcut(_translate("MainWindow", "Ctrl+Shift+C"))
-        self.actionAbout_Application.setText(_translate("MainWindow", self.langMap["ABOUT_PROJECT"][self.lIndex]))
-        self.actionAbout_Application.setToolTip(_translate("MainWindow", self.langMap["ABOUT_PROJECT_TIP"][self.lIndex]))
+        self.actionAbout_Application.setText(_translate("MainWindow", self._langMap["ABOUT_PROJECT"][self._lIndex]))
+        self.actionAbout_Application.setToolTip(_translate("MainWindow", self._langMap["ABOUT_PROJECT_TIP"][self._lIndex]))
 
 
     def CustomTreedItem(self, txt='', font_size=12, set_bold=False, color=QColor(0, 0, 0)):
@@ -234,12 +234,12 @@ class Ui_MainWindow(object):
 
 
     def getLangIndex(self):
-        return self.lIndex
+        return self._lIndex
 
 
     def setLangIndex(self, index):
         if int(index) > 0:
-            self.listNum = int(index)
+            self._lIndex = int(index)
 
 
 if __name__ == "__main__":

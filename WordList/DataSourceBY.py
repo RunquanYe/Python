@@ -12,17 +12,17 @@ This is a class for finding online data from Bing Dictionary for the missing dat
 class DataSourceBY():
     # constructor
     # 词名，词类，词意，美音标，英音标, 词类list，词意list
-    dName, dCatergory, dMeaning, dUs_pt, dUk_pt, dCatergoryList, dMeaningList = '', '', '', '', '', [], []
+    _dName, _dCatergory, _dMeaning, _dUS_pt, _dUK_pt, _dCatergoryList, _dMeaningList = '', '', '', '', '', [], []
 
-    modeName = "Bing"
+    _modeName = "Bing"
 
     def __init__(self, word):
         if bool(word and word.strip()):
-            self.dName = word.lower()
+            self._dName = word.lower()
 
         #get word's data from the web
-            # webpage = urlopen('https://cn.bing.com/dict/search?q=' + self.dName + '&FORM=BDVSP6&mkt=zh-cn').read()
-            webpage = urlopen('https://cn.bing.com/dict/search?q=' + self.dName + '&mkt=zh-cn').read()
+            # webpage = urlopen('https://cn.bing.com/dict/search?q=' + self._dName + '&FORM=BDVSP6&mkt=zh-cn').read()
+            webpage = urlopen('https://cn.bing.com/dict/search?q=' + self._dName + '&mkt=zh-cn').read()
 
         #transfer opening url to html document
             soup = BeautifulSoup(webpage, 'html.parser')
@@ -58,39 +58,39 @@ class DataSourceBY():
                 wMean = wTempMean.replace('；', ', ').replace('|', '; ')
 
                 # wMean => ['n. 冰雹, 雹子, 【气】雹, 像雹子般落下的东西', ' v. 招呼, 〈正式〉喊, 捧, 歌颂', ' int. 万岁']
-                self.dMeaningList = re.split('[;；]', wMean.lower())
-                #dMeaningList => ['int', 'n', 'v']
-                self.dCatergoryList = [i[0] for i in sorted([list(filter(None, re.split('[.,， ]', i))) for i in self.dMeaningList])]
+                self._dMeaningList = re.split('[;；]', wMean.lower())
+                #_dMeaningList => ['int', 'n', 'v']
+                self._dCatergoryList = [i[0] for i in sorted([list(filter(None, re.split('[.,， ]', i))) for i in self._dMeaningList])]
 
-                self.dUs_pt = uspt
-                self.dUk_pt = ukpt
-                self.dCatergory = ', '.join(str(i) for i in self.dCatergoryList)
-                self.dMeaning = wMean
+                self._dUS_pt = uspt
+                self._dUK_pt = ukpt
+                self._dCatergory = ', '.join(str(i) for i in self._dCatergoryList)
+                self._dMeaning = wMean
 
 
     def getWordName(self):
-        return self.dName.lower()
+        return self._dName.lower()
 
     def getWordDataUSPT(self):
-        return self.dUs_pt
+        return self._dUS_pt
 
     def getWordDataUKPT(self):
-        return self.dUk_pt
+        return self._dUK_pt
 
     def getWordMeaning(self):
-        return self.dMeaning.lower()
+        return self._dMeaning.lower()
 
     def getWordCategory(self):
-        return self.dCatergory.lower()
+        return self._dCatergory.lower()
 
     def getWordCategoryList(self):
-        return self.dCatergoryList
+        return self._dCatergoryList
 
     def getWordMeaningList(self):
-        return self.dMeaningList
+        return self._dMeaningList
 
     def getModeName(self):
-        return self.modeName
+        return self._modeName
 
     # Bing online word audio:
     '''
