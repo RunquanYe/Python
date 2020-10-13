@@ -93,11 +93,11 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
     def loadDataTreeLis(self):
         for w in self._appWordList:
             if w.getIsHead():
-                tempHead = self.CustomTreedItem(w.getWord(), 16, set_bold=True, color=QColor(0, 0, 204))
+                tempHead = self.CustomTreedItem(w.getWord(), 13, set_bold=True, color=QColor(0, 0, 204))
                 # tempHead.mousePressEvent(self, self.loadDataHLTable(list(str(w.getWord() + ", " + w.getDerivativeWordString()).split(', ')), 1))
                 self.rootNode.appendRow(tempHead)
             else:
-                tempNode = self.CustomTreedItem(w.getWord(), 14)
+                tempNode = self.CustomTreedItem(w.getWord(), 12)
                 tempHead.appendRow(tempNode)
 
 
@@ -119,21 +119,23 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                         listNum = rawData[0]
                         wordlist = rawData[1:]
                         for vocably in wordlist:
-                            # print(wordnum, ": ",vocably)
-                            word = Word(str(vocably).rstrip(), '', '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
-                            self._appWordList.append(word)
-                            self._appWordDict.update({word.getWord(): word.getWordDictData()})
-                            if wordlist.index(vocably) == 0:
-                                self._appWordHeadList.append(word)
-                            wordnum += 1
+                            if not dict.has_key(vocably):
+                                # print(wordnum, ": ",vocably)
+                                word = Word(str(vocably).rstrip(), '', '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
+                                self._appWordList.append(word)
+                                self._appWordDict.update({word.getWord(): word.getWordDictData()})
+                                if wordlist.index(vocably) == 0:
+                                    self._appWordHeadList.append(word)
+                                wordnum += 1
                     elif "dict" in str(method).lower():
-                        # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
-                        data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
-                        word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11])
-                        self._appWordList.append(word)
-                        self._appWordDict.update({word.getWord():word.getWordDictData()})
-                        if data[10]:
-                            self._appWordHeadList.append(word)
+                        if not dict.has_key(vocably):
+                            # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
+                            data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
+                            word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11])
+                            self._appWordList.append(word)
+                            self._appWordDict.update({word.getWord():word.getWordDictData()})
+                            if data[10]:
+                                self._appWordHeadList.append(word)
                 # print([i.getWord() for i in self._appWordList])
                 # print(self._appWordDict)
                 self._appWordHeadListName = [i.getWord() for i in self._appWordHeadList]
