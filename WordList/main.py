@@ -119,7 +119,8 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                         listNum = rawData[0]
                         wordlist = rawData[1:]
                         for vocably in wordlist:
-                            if not dict.has_key(vocably):
+                            # if not dict.has_key(vocably):
+                            if vocably not in self._appWordList:
                                 # print(wordnum, ": ",vocably)
                                 word = Word(str(vocably).rstrip(), '', '', '', '', '', '', wordlist[1:] if wordlist.index(vocably) == 0 else '', wordlist[0] if wordlist.index(vocably) != 0 else '', wordnum, listNum, True if wordlist.index(vocably) == 0 else False)
                                 self._appWordList.append(word)
@@ -128,7 +129,8 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
                                     self._appWordHeadList.append(word)
                                 wordnum += 1
                     elif "dict" in str(method).lower():
-                        if not dict.has_key(vocably):
+                        # if not dict.has_key(vocably):
+                        if vocably not in self._appWordList:
                             # re.sub(r"^\s+|\s+$", "", s) ==> remove leading and trailing spaces and ending newline mark
                             data = list(re.sub(r"^\s+|\s+$", "", str(i)) for i in l.split('|'))
                             word = Word(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11])
