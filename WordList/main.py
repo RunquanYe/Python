@@ -1,4 +1,6 @@
 import sys
+import pyttsx3
+
 from os import path, stat
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QColor, QBrush
@@ -28,11 +30,13 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
     _innerWordListExist = False
     _innerWordDataExist = False
     _langMap = TranslateMap().getLanguageMap()
+    speaker = pyttsx3.init()
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.show()
         self._langIndex = self.getLangIndex()
+        
 
 
     def loadInnerData(self):
@@ -191,7 +195,9 @@ class WordListApplication(WordAppUI.Ui_MainWindow, QtWidgets.QMainWindow):
         index = signal.sibling(row, 0)
         index_dict = self.wordListTableModel.itemData(index)
         index_value = index_dict.get(0)
-        print('Column 1 contents: {}'.format(index_value))
+        speaker.say(index_value)
+        speaker.runAndWait()
+        # print('Column 1 contents: {}'.format(index_value))
 
 
 def main():
