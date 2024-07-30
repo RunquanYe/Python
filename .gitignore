@@ -1,0 +1,21 @@
+# ignore all the compile python pyc files
+**/*.pyc
+
+# ignore all the log files
+**/*.log
+
+#ignore the all the .DS_Store files
+**/.DS_Store
+
+# ignore the .vscode directory
+**/.vscode
+**/.vs
+
+# ignore directories
+**/.idea
+**/.dSYM
+**/.ipynb_checkpoints
+
+#ignore the __pycache__ directory
+**/__pycache__
+
