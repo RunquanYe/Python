@@ -8,7 +8,8 @@ Hello, 😄, to see more of my projects in other languages, please take a look a
 ---
 
 ## Color Panel
-I programmed a customized schdule shutdown program Windows bat script to allow user to customized schduled program in mutiple ways, like countdown mode, schdule time mode, monitor and wait for process finished mode.  The program bult-in user instruction and my profile hyperlinks.
+
+This project using python script to generate a Jupyter Notebook that display some of my favorite color set collection table markdown, that could let user previewed the selected color's effects and what the output is going to look like.  Hope this small project you may like or be useful to you in someways.
 
 <p align="center"><img width="600" height="300" src="https://github.com/RunquanYe/Python/blob/main/img/ColorPanel02.png"/></p>
 
