@@ -79,7 +79,7 @@ for (key, val) in color_set.items():
     nb.cells.append(nbf.v4.new_markdown_cell("---"))
 
 # Save the modified notebook
-with open('ColorBoard.ipynb', 'w+', encoding='utf-8') as f:
+with open('ColorPanel.ipynb', 'w+', encoding='utf-8') as f:
     nbf.write(nb, f)
 
-print("\tSucceeded! Saved as 'ColorBoard.ipynb'")
+print("\tSucceeded! Saved as 'ColorPanel.ipynb'")
