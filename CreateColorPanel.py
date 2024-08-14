@@ -31,7 +31,8 @@ color_set = {
         6 : ["#e7e47d", "#b69649", "#8edc62", "#5aaa31", "#479396"],
         7 : ["#ff4e50", "#f57758", "#eca061", "#e2c969", "#d8f271"],
         8 : ["#423f3f", "#336b8b", "#83984d", "#f0b51f", "#ea700b"],
-        9 : ["#22d3ee", "#f87171", "#facc15", "#e879f9", "#4ade80"]
+        9 : ["#22d3ee", "#f87171", "#facc15", "#e879f9", "#4ade80"],
+        10 : ["#005ea0", "#00872f", "#ecd766", "#ee6433", "#f87492"]
     },
     "Six_Color_Set" : {
         1 : ["#f9acdf", "#f7c98b", "#dbfb78", "#abf28c", "#90dcf2", "#e181ea"],
@@ -40,7 +41,9 @@ color_set = {
     },
     "Other_Color_Set" : {
         1 : ["#fe5e9d", "#f9662d", "#5e22a0", "#38a879", "#51cbf4", "#314cd2", "#f63933", "#1f2227"],
-        2 : ["#bc908f", "#bc9690", "#e9ccd0", "#a89ea6", "#8c94c0", "#89a6a4", "#7767a7", "#829fcc", "#88a498", "#a99787", "#e88b93", "#99888e"]
+        2 : ["#42272f", "#713a44", "#6d4b48", "#735c58", "#7f6b5a", "#466053", "#36524d", "#355d6f", "#353a50"],
+        3 : ["#fd83a2", "#e77553", "#ddd779", "#71b470", "#98c6d5", "#ce87c8", "#f4768b", "#b9bed9", "#bc98d5"], 
+        4 : ["#bc908f", "#bc9690", "#e9ccd0", "#6f5c56", "#8c94c0", "#89a6a4", "#7767a7", "#829fcc", "#88a498", "#a99787", "#e88b93", "#99888e"] 
     }
 }
 
@@ -76,7 +79,7 @@ for (key, val) in color_set.items():
     nb.cells.append(nbf.v4.new_markdown_cell("---"))
 
 # Save the modified notebook
-with open('ColorPanel.ipynb', 'w+', encoding='utf-8') as f:
+with open('ColorBoard.ipynb', 'w+', encoding='utf-8') as f:
     nbf.write(nb, f)
 
-print("\tSucceeded! Saved as 'ColorPanel.ipynb'")
+print("\tSucceeded! Saved as 'ColorBoard.ipynb'")
